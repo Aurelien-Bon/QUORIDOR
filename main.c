@@ -1,11 +1,9 @@
 #include <stdio.h>
 #include <stdlib.h>
-void test()
-{
-    printf("test");
-}
+#include "terrain.h"
 int main()
 {
     printf("QUORIDOR le projet trop eclate!\n");
+    gereTerrain();
     return 0;
 }

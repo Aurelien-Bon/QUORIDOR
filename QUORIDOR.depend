@@ -1,0 +1,10 @@
+# depslib dependency file v1.0
+1635178753 source:c:\users\aurel\documents\github\quoridor\main.c
+	<stdio.h>
+	<stdlib.h>
+	"terrain.h"
+
+1635178755 c:\users\aurel\documents\github\quoridor\terrain.h
+
+1635174190 source:c:\users\aurel\documents\github\quoridor\terrain.c
+

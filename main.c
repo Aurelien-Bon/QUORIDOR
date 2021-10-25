@@ -6,6 +6,6 @@ void test()
 }
 int main()
 {
-    printf("QUORIDOR le projet trop styler!\n");
+    printf("QUORIDOR le projet trop eclate!\n");
     return 0;
 }

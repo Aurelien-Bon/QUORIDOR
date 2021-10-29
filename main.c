@@ -3,7 +3,7 @@
 #include "terrain.h"
 int main()
 {
-    printf("QUORIDOR le projet trop eclate!\n");
+    printf("QUORIDOR le projet trop bien!\n");
     gereTerrain();
     return 0;
 }

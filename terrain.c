@@ -1,3 +1,5 @@
+#include "terrain.h"
+
 void creaTerrain(char terrain[20][40])
 {
     terrain[2][0]='1';
@@ -71,20 +73,48 @@ void creaTerrain(char terrain[20][40])
         }
     }
 }
-void affichage(char terrain[20][40])
+void affichage( t_terrain terrain)
 {
     for(int i=0;i<20;i++)
     {
         for(int j=0;j<40;j++)
         {
-            printf("%c",terrain[i][j]);
+            printf("%c",terrain.grille[i][j]);
         }
         printf("\n");
     }
 }
+void changecarac(char terrain[20][40],char type,int colone,int ligne)
+{
+    for(int i=0;i<20;i++)
+    {
+        for(int j=0;j<40;j++)
+        {
+            if(terrain[i][j]==type)
+                terrain[i][j]=0x00;
+        }
+    }
+    terrain[((int)ligne*2)+2][(colone*4)+6]=type;
+}
+void addbariere(t_terrain terrain)
+{
+
+}
 void gereTerrain()
 {
-    char terrain[20][40]={0x00};
-    creaTerrain(terrain);
+    t_terrain terrain={0x00};
+    for(int i=0;i<20;i++)
+    {
+        terrain.list->id=i;
+        terrain.list->cord_x=0;
+        terrain.list->cord_y=0;
+        terrain.list->active=0;
+    }
+    creaTerrain(terrain.grille);
+    affichage(terrain);
+    printf("\n");
+    changecarac(terrain.grille,'@',0,0);
+    affichage(terrain);
+    changecarac(terrain.grille,'@',1,0);
     affichage(terrain);
 }

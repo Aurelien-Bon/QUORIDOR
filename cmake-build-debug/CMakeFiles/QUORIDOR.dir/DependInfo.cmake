@@ -8,6 +8,10 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_C
+  "/Users/savinabon/Documents/GitHub/QUORIDOR/bariere.c" "/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles/QUORIDOR.dir/bariere.c.o"
+  "/Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.c" "/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles/QUORIDOR.dir/crosshaire.c.o"
+  "/Users/savinabon/Documents/GitHub/QUORIDOR/jeu.c" "/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles/QUORIDOR.dir/jeu.c.o"
+  "/Users/savinabon/Documents/GitHub/QUORIDOR/joueur.c" "/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles/QUORIDOR.dir/joueur.c.o"
   "/Users/savinabon/Documents/GitHub/QUORIDOR/main.c" "/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles/QUORIDOR.dir/main.c.o"
   "/Users/savinabon/Documents/GitHub/QUORIDOR/terrain.c" "/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles/QUORIDOR.dir/terrain.c.o"
   )

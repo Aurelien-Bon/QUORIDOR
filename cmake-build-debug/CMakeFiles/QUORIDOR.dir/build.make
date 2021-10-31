@@ -66,9 +66,61 @@ include CMakeFiles/QUORIDOR.dir/progress.make
 # Include the compile flags for this target's objects.
 include CMakeFiles/QUORIDOR.dir/flags.make
 
+CMakeFiles/QUORIDOR.dir/bariere.c.o: CMakeFiles/QUORIDOR.dir/flags.make
+CMakeFiles/QUORIDOR.dir/bariere.c.o: ../bariere.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/QUORIDOR.dir/bariere.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QUORIDOR.dir/bariere.c.o -c /Users/savinabon/Documents/GitHub/QUORIDOR/bariere.c
+
+CMakeFiles/QUORIDOR.dir/bariere.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/QUORIDOR.dir/bariere.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/savinabon/Documents/GitHub/QUORIDOR/bariere.c > CMakeFiles/QUORIDOR.dir/bariere.c.i
+
+CMakeFiles/QUORIDOR.dir/bariere.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/QUORIDOR.dir/bariere.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/savinabon/Documents/GitHub/QUORIDOR/bariere.c -o CMakeFiles/QUORIDOR.dir/bariere.c.s
+
+CMakeFiles/QUORIDOR.dir/crosshaire.c.o: CMakeFiles/QUORIDOR.dir/flags.make
+CMakeFiles/QUORIDOR.dir/crosshaire.c.o: ../crosshaire.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/QUORIDOR.dir/crosshaire.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QUORIDOR.dir/crosshaire.c.o -c /Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.c
+
+CMakeFiles/QUORIDOR.dir/crosshaire.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/QUORIDOR.dir/crosshaire.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.c > CMakeFiles/QUORIDOR.dir/crosshaire.c.i
+
+CMakeFiles/QUORIDOR.dir/crosshaire.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/QUORIDOR.dir/crosshaire.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.c -o CMakeFiles/QUORIDOR.dir/crosshaire.c.s
+
+CMakeFiles/QUORIDOR.dir/jeu.c.o: CMakeFiles/QUORIDOR.dir/flags.make
+CMakeFiles/QUORIDOR.dir/jeu.c.o: ../jeu.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Building C object CMakeFiles/QUORIDOR.dir/jeu.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QUORIDOR.dir/jeu.c.o -c /Users/savinabon/Documents/GitHub/QUORIDOR/jeu.c
+
+CMakeFiles/QUORIDOR.dir/jeu.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/QUORIDOR.dir/jeu.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/savinabon/Documents/GitHub/QUORIDOR/jeu.c > CMakeFiles/QUORIDOR.dir/jeu.c.i
+
+CMakeFiles/QUORIDOR.dir/jeu.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/QUORIDOR.dir/jeu.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/savinabon/Documents/GitHub/QUORIDOR/jeu.c -o CMakeFiles/QUORIDOR.dir/jeu.c.s
+
+CMakeFiles/QUORIDOR.dir/joueur.c.o: CMakeFiles/QUORIDOR.dir/flags.make
+CMakeFiles/QUORIDOR.dir/joueur.c.o: ../joueur.c
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_4) "Building C object CMakeFiles/QUORIDOR.dir/joueur.c.o"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QUORIDOR.dir/joueur.c.o -c /Users/savinabon/Documents/GitHub/QUORIDOR/joueur.c
+
+CMakeFiles/QUORIDOR.dir/joueur.c.i: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Preprocessing C source to CMakeFiles/QUORIDOR.dir/joueur.c.i"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -E /Users/savinabon/Documents/GitHub/QUORIDOR/joueur.c > CMakeFiles/QUORIDOR.dir/joueur.c.i
+
+CMakeFiles/QUORIDOR.dir/joueur.c.s: cmake_force
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green "Compiling C source to assembly CMakeFiles/QUORIDOR.dir/joueur.c.s"
+	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -S /Users/savinabon/Documents/GitHub/QUORIDOR/joueur.c -o CMakeFiles/QUORIDOR.dir/joueur.c.s
+
 CMakeFiles/QUORIDOR.dir/main.c.o: CMakeFiles/QUORIDOR.dir/flags.make
 CMakeFiles/QUORIDOR.dir/main.c.o: ../main.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_1) "Building C object CMakeFiles/QUORIDOR.dir/main.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_5) "Building C object CMakeFiles/QUORIDOR.dir/main.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QUORIDOR.dir/main.c.o -c /Users/savinabon/Documents/GitHub/QUORIDOR/main.c
 
 CMakeFiles/QUORIDOR.dir/main.c.i: cmake_force
@@ -81,7 +133,7 @@ CMakeFiles/QUORIDOR.dir/main.c.s: cmake_force
 
 CMakeFiles/QUORIDOR.dir/terrain.c.o: CMakeFiles/QUORIDOR.dir/flags.make
 CMakeFiles/QUORIDOR.dir/terrain.c.o: ../terrain.c
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_2) "Building C object CMakeFiles/QUORIDOR.dir/terrain.c.o"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_6) "Building C object CMakeFiles/QUORIDOR.dir/terrain.c.o"
 	/Library/Developer/CommandLineTools/usr/bin/cc $(C_DEFINES) $(C_INCLUDES) $(C_FLAGS) -o CMakeFiles/QUORIDOR.dir/terrain.c.o -c /Users/savinabon/Documents/GitHub/QUORIDOR/terrain.c
 
 CMakeFiles/QUORIDOR.dir/terrain.c.i: cmake_force
@@ -94,17 +146,25 @@ CMakeFiles/QUORIDOR.dir/terrain.c.s: cmake_force
 
 # Object files for target QUORIDOR
 QUORIDOR_OBJECTS = \
+"CMakeFiles/QUORIDOR.dir/bariere.c.o" \
+"CMakeFiles/QUORIDOR.dir/crosshaire.c.o" \
+"CMakeFiles/QUORIDOR.dir/jeu.c.o" \
+"CMakeFiles/QUORIDOR.dir/joueur.c.o" \
 "CMakeFiles/QUORIDOR.dir/main.c.o" \
 "CMakeFiles/QUORIDOR.dir/terrain.c.o"
 
 # External object files for target QUORIDOR
 QUORIDOR_EXTERNAL_OBJECTS =
 
+QUORIDOR: CMakeFiles/QUORIDOR.dir/bariere.c.o
+QUORIDOR: CMakeFiles/QUORIDOR.dir/crosshaire.c.o
+QUORIDOR: CMakeFiles/QUORIDOR.dir/jeu.c.o
+QUORIDOR: CMakeFiles/QUORIDOR.dir/joueur.c.o
 QUORIDOR: CMakeFiles/QUORIDOR.dir/main.c.o
 QUORIDOR: CMakeFiles/QUORIDOR.dir/terrain.c.o
 QUORIDOR: CMakeFiles/QUORIDOR.dir/build.make
 QUORIDOR: CMakeFiles/QUORIDOR.dir/link.txt
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_3) "Linking C executable QUORIDOR"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --green --bold --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=$(CMAKE_PROGRESS_7) "Linking C executable QUORIDOR"
 	$(CMAKE_COMMAND) -E cmake_link_script CMakeFiles/QUORIDOR.dir/link.txt --verbose=$(VERBOSE)
 
 # Rule to build all files generated by this target.

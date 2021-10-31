@@ -1,0 +1,16 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+/Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.c
+crosshaire.h
+/Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.h
+stdlib.h
+-
+
+/Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.h
+

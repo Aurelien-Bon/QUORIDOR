@@ -81,12 +81,12 @@ clean: CMakeFiles/QUORIDOR.dir/clean
 CMakeFiles/QUORIDOR.dir/all:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/depend
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/build
-	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=1,2,3 "Built target QUORIDOR"
+	@$(CMAKE_COMMAND) -E cmake_echo_color --switch=$(COLOR) --progress-dir=/Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles --progress-num=1,2,3,4,5,6,7 "Built target QUORIDOR"
 .PHONY : CMakeFiles/QUORIDOR.dir/all
 
 # Build rule for subdir invocation for target.
 CMakeFiles/QUORIDOR.dir/rule: cmake_check_build_system
-	$(CMAKE_COMMAND) -E cmake_progress_start /Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles 3
+	$(CMAKE_COMMAND) -E cmake_progress_start /Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles 7
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 CMakeFiles/QUORIDOR.dir/all
 	$(CMAKE_COMMAND) -E cmake_progress_start /Users/savinabon/Documents/GitHub/QUORIDOR/cmake-build-debug/CMakeFiles 0
 .PHONY : CMakeFiles/QUORIDOR.dir/rule

@@ -8,4 +8,6 @@ typedef struct joueur
     t_crosshaire crosshaire;
     int nb_bariere;
 }t_joueur;
+struct joueur creeJoueur(void);
+void affichierJoueur(struct joueur j);
 #endif // JOUEUR_H_INCLUDED

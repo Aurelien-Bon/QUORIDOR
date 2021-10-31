@@ -78,6 +78,30 @@
 				</MakeCommands>
 			</Target>
 		</Build>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/bariere.c">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/bariere.h">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.c">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/crosshaire.h">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/jeu.c">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/jeu.h">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/joueur.c">
+			<Option target="QUORIDOR"/>
+		</Unit>
+		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/joueur.h">
+			<Option target="QUORIDOR"/>
+		</Unit>
 		<Unit filename="/Users/savinabon/Documents/GitHub/QUORIDOR/main.c">
 			<Option target="QUORIDOR"/>
 		</Unit>

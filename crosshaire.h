@@ -6,5 +6,11 @@ typedef struct crosshaire
     int cor_x;
     int cor_y;
 }t_crosshaire;
+char choixType(void);
+struct crosshaire creeCrossaire(void);
+int getX(struct crosshaire c);
+int getY(struct crosshaire c);
+char getType(struct crosshaire c);
+
 #endif // JOUEUR_H_INCLUDED
 

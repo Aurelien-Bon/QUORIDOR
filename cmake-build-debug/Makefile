@@ -129,6 +129,102 @@ QUORIDOR/fast:
 	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/build
 .PHONY : QUORIDOR/fast
 
+bariere.o: bariere.c.o
+.PHONY : bariere.o
+
+# target to build an object file
+bariere.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/bariere.c.o
+.PHONY : bariere.c.o
+
+bariere.i: bariere.c.i
+.PHONY : bariere.i
+
+# target to preprocess a source file
+bariere.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/bariere.c.i
+.PHONY : bariere.c.i
+
+bariere.s: bariere.c.s
+.PHONY : bariere.s
+
+# target to generate assembly for a file
+bariere.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/bariere.c.s
+.PHONY : bariere.c.s
+
+crosshaire.o: crosshaire.c.o
+.PHONY : crosshaire.o
+
+# target to build an object file
+crosshaire.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/crosshaire.c.o
+.PHONY : crosshaire.c.o
+
+crosshaire.i: crosshaire.c.i
+.PHONY : crosshaire.i
+
+# target to preprocess a source file
+crosshaire.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/crosshaire.c.i
+.PHONY : crosshaire.c.i
+
+crosshaire.s: crosshaire.c.s
+.PHONY : crosshaire.s
+
+# target to generate assembly for a file
+crosshaire.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/crosshaire.c.s
+.PHONY : crosshaire.c.s
+
+jeu.o: jeu.c.o
+.PHONY : jeu.o
+
+# target to build an object file
+jeu.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/jeu.c.o
+.PHONY : jeu.c.o
+
+jeu.i: jeu.c.i
+.PHONY : jeu.i
+
+# target to preprocess a source file
+jeu.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/jeu.c.i
+.PHONY : jeu.c.i
+
+jeu.s: jeu.c.s
+.PHONY : jeu.s
+
+# target to generate assembly for a file
+jeu.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/jeu.c.s
+.PHONY : jeu.c.s
+
+joueur.o: joueur.c.o
+.PHONY : joueur.o
+
+# target to build an object file
+joueur.c.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/joueur.c.o
+.PHONY : joueur.c.o
+
+joueur.i: joueur.c.i
+.PHONY : joueur.i
+
+# target to preprocess a source file
+joueur.c.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/joueur.c.i
+.PHONY : joueur.c.i
+
+joueur.s: joueur.c.s
+.PHONY : joueur.s
+
+# target to generate assembly for a file
+joueur.c.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/QUORIDOR.dir/build.make CMakeFiles/QUORIDOR.dir/joueur.c.s
+.PHONY : joueur.c.s
+
 main.o: main.c.o
 .PHONY : main.o
 
@@ -186,6 +282,18 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... QUORIDOR"
+	@echo "... bariere.o"
+	@echo "... bariere.i"
+	@echo "... bariere.s"
+	@echo "... crosshaire.o"
+	@echo "... crosshaire.i"
+	@echo "... crosshaire.s"
+	@echo "... jeu.o"
+	@echo "... jeu.i"
+	@echo "... jeu.s"
+	@echo "... joueur.o"
+	@echo "... joueur.i"
+	@echo "... joueur.s"
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"

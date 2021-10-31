@@ -1,3 +1,0 @@
-﻿  terrain.c
-C:\Users\aurel\Documents\GitHub\QUORIDOR\terrain.c(80,19): warning C4013: 'printf' non défini(e) ; extern retournant int pris par défaut
-  QUORIDOR.vcxproj -> C:\Users\aurel\Documents\GitHub\QUORIDOR\Debug\QUORIDOR.exe

@@ -16,5 +16,6 @@ void affichierJoueur(struct joueur j)
     printf("Pseudo: %s, ",j.nom);
     printf("Score: %d, ",j.score);
     printf("bariere restantante: %d, ",j.nb_bariere);
-    printf("crossaire: %c.\n",j.crosshaire);
+    printf("crossaire: %c en coordoner x=%d et y=%d.\n",j.crosshaire.type,j.crosshaire.cor_x,j.crosshaire.cor_y);
+
 }

@@ -3,8 +3,8 @@
 typedef struct crosshaire
 {
     char type;
-    int cor_x;
-    int cor_y;
+    int cor_x;//colonne
+    int cor_y;//ligne
 }t_crosshaire;
 char choixType(void);
 struct crosshaire creeCrossaire(void);

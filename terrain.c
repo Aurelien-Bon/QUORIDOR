@@ -97,10 +97,20 @@ void changecarac(char terrain[20][40],char type,int colone,int ligne)
                 terrain[i][j]=0x00;
         }
     }
-    terrain[((int)ligne*2)+2][(colone*4)+6]=type;
+    terrain[(ligne*2)+2][(colone*4)+6]=type;
 }
 void addbariere(t_terrain terrain)
 {
 
 }
-
+int checkMouve(t_terrain t,int x,int y)
+{
+    if(t.grille[((int)x*2)+2][(y*4)+6]==0x00)
+    {
+        return 1;
+    }
+    else
+    {
+        return 0;
+    }
+}

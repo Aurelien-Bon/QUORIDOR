@@ -7,6 +7,8 @@ typedef struct joueur
     int score;
     t_crosshaire crosshaire;
     int nb_bariere;
+    char startside;
+    struct joueur *next;
 }t_joueur;
 struct joueur creeJoueur(void);
 void affichierJoueur(struct joueur j);

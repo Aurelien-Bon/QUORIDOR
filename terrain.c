@@ -1,10 +1,23 @@
 #include "terrain.h"
 #include <stdio.h>
+#include <windows.h>
+
+void gotoligcol( int lig, int col )
+{
+    // ressources
+    COORD mycoord;
+
+    mycoord.X = col;
+    mycoord.Y = lig;
+    SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
+}
+
 
 struct terrain creeTerrain()
 {
-    t_terrain grille={0};
+    t_terrain grille={0x00};
     grille.grille[2][0]='1';
+    grille.grille[0][7]=0x00;
     grille.grille[4][0]='2';
     grille.grille[6][0]='3';
     grille.grille[8][0]='4';
@@ -54,7 +67,8 @@ struct terrain creeTerrain()
                 {
                     grille.grille[i][j]=0xC5;
                 }
-                else{
+                else
+                {
                     grille.grille[i][j]=0xC4;
                 }
 
@@ -68,7 +82,8 @@ struct terrain creeTerrain()
                 {
                     grille.grille[i][j]=0xB3;
                 }
-                else{
+                else
+                {
                     grille.grille[i][j]=0x00;
                 }
             }
@@ -76,7 +91,7 @@ struct terrain creeTerrain()
     }
     return grille;
 }
-void affichage( struct terrain terrain)
+void affichageTerrain( struct terrain terrain)
 {
     for(int i=0;i<20;i++)
     {
@@ -85,32 +100,5 @@ void affichage( struct terrain terrain)
             printf("%c",terrain.grille[i][j]);
         }
         printf("\n");
-    }
-}
-void changecarac(char terrain[20][40],char type,int colone,int ligne)
-{
-    for(int i=0;i<20;i++)
-    {
-        for(int j=0;j<40;j++)
-        {
-            if(terrain[i][j]==type)
-                terrain[i][j]=0x00;
-        }
-    }
-    terrain[(ligne*2)+2][(colone*4)+6]=type;
-}
-void addbariere(t_terrain terrain)
-{
-
-}
-int checkMouve(t_terrain t,int x,int y)
-{
-    if(t.grille[((int)x*2)+2][(y*4)+6]==0x00)
-    {
-        return 1;
-    }
-    else
-    {
-        return 0;
     }
 }

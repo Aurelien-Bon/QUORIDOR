@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "jeu.h"
+#include <windows.h>
 
 struct jeu creeJeu(void)
 {
@@ -100,8 +102,74 @@ void newGame(struct jeu *jeu)
 }
 void oldGame(struct jeu *jeu)
 {
-
-    ///RECUPERATION DU JEU PAR LECTURE DE FICHIER
+    FILE *f=NULL;
+    f=fopen("oldGame.txt","r");
+    if(f==NULL)
+    {
+        printf("Erreur ouverture fichier");
+        return -1;
+    }
+    else
+    {
+        int test;
+        fscanf(f,"%d",&test);
+        jeu->nbjoueur=test;
+        //printf("%d\n",test);
+        char chaine[70];
+        char d[]=",";
+        if(jeu->nbjoueur==2)
+        {
+            jeu->ordrejeu.j=&jeu->j1;
+            jeu->j1.next=&jeu->j2;
+            jeu->j2.next=&jeu->j1;
+        }
+        if(jeu->nbjoueur==4)
+        {
+            jeu->ordrejeu.j=&jeu->j1;
+            jeu->j1.next=&jeu->j2;
+            jeu->j2.next=&jeu->j3;
+            jeu->j1.next=&jeu->j4;
+            jeu->j2.next=&jeu->j1;
+        }
+        struct joueur *nextj=jeu->ordrejeu.j;
+        for(int i=0;i<jeu->nbjoueur;i++)
+        {
+            fscanf(f,"%s",&chaine);
+            char *p =strtok(chaine,d);
+            strcpy(nextj->nom,p);
+            p=strtok(NULL,d);
+            nextj->score=atoi(p);
+            p=strtok(NULL,d);
+            nextj->crosshaire.type=p[0];
+            p=strtok(NULL,d);
+            nextj->crosshaire.cor_x=atoi(p);
+            p=strtok(NULL,d);
+            nextj->crosshaire.cor_y=atoi(p);
+            p=strtok(NULL,d);
+            nextj->nb_bariere=atoi(p);
+            p=strtok(NULL,d);
+            nextj->startside=atoi(p);
+            nextj=nextj->next;
+        }
+        for(int i=0;i<20;i++)
+        {
+            fscanf(f,"%s",&chaine);
+            char *p =strtok(chaine,d);
+            jeu->bariere[i].id=atoi(p);
+            p=strtok(NULL,d);
+            jeu->bariere[i].cord_y=atoi(p);
+            p=strtok(NULL,d);
+            jeu->bariere[i].cord_y=atoi(p);
+            p=strtok(NULL,d);
+            jeu->bariere[i].sens=p[0];
+            p=strtok(NULL,d);
+            jeu->bariere[i].active=atoi(p);
+            p=strtok(NULL,d);
+        }
+        fscanf(f,"%d",&
+               jeu->etat);
+    }
+    fclose(f);
 }
 void startGame(int load)
 {
@@ -110,17 +178,8 @@ void startGame(int load)
         newGame(&jeu);
     else
         oldGame(&jeu);
-    affichierJoueur(jeu.j1);
-    affichierJoueur(jeu.j2);
-    affichierJoueur(jeu.j3);
-    affichierJoueur(jeu.j4);
-    /*affichage(jeu.terrain);
-    for(int i=0;i<20;i++)
-    {
-        afficherBariere(jeu.bariere[i]);
-    }
     printf("jeu etat: %d, ",jeu.etat);
-    printf("next joueur: %s\n", jeu.ordrejeu.j->nom);*/
+    //printf("next joueur: %s\n", jeu.ordrejeu.j->nom);
     struct joueur *nextj=jeu.ordrejeu.j;
     int finJeu=0;
 
@@ -135,6 +194,7 @@ void startGame(int load)
         {
             printf("Victoire de %s il remporte 5 point",nextj->nom);
             nextj->score+=5;
+            finJeu=1;
         }
         nextj=nextj->next;
         //affichage(jeu.terrain);
@@ -175,6 +235,7 @@ int round(struct joueur *j, struct jeu *jeu)
         case 4:
             break;
         case 5:
+            enregistrement(*jeu);
             return 1;
             break;
     }
@@ -222,6 +283,7 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
     int quitter=0;
     do
     {
+        affichage(*jeu,*j);
         char c=' ';
         fflush(stdin);
         c = getchar();
@@ -229,7 +291,7 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
         switch(c)
         {
             case 'z':
-                if(y-1>=0&&y-1<9)
+                if(newX-1>=0&&newX-1<9)
                 {
                     possible=deplacementchoisi(j,0,-1,jeu,&newX,&newY);
                 }
@@ -240,7 +302,7 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
                 }
                 break;
             case 's':
-                if(y+1>=0&&y+1<9)
+                if(newX+1>=0&&newX+1<9)
                     possible=deplacementchoisi(j,0,1,jeu,&newX,&newY);
                 else
                 {
@@ -249,7 +311,7 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
                 }
                 break;
             case 'q':
-                if(x-1>=0&&x-1<9)
+                if(newY-1>=0&&newY-1<9)
                     possible=deplacementchoisi(j,-1,0,jeu,&newX,&newY);
                 else
                 {
@@ -258,7 +320,7 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
                 }
                 break;
             case 'd':
-                if(x+1>=0&&x+1<9)
+                if(newY+1>=0&&newY+1<9)
                     possible=deplacementchoisi(j,1,0,jeu,&newX,&newY);
                 else
                 {
@@ -276,19 +338,26 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
         }
         if(possible==1)
         {
-            changecarac(jeu->terrain.grille,j->crosshaire.type,newX,newY);
+            j->crosshaire.cor_x=newX;
+            j->crosshaire.cor_y=newY;
         }
         printf("%d,%d\n",newX,newY);
-        affichage(jeu->terrain);
+
     }while(quitter==0);
-    j->crosshaire.cor_x=newX;
-    j->crosshaire.cor_y=newY;
 }
 int deplacementchoisi(struct joueur *j,int x,int y,struct jeu *jeu,int *newX,int *newY)
 {
     *newX=x+j->crosshaire.cor_x;
     *newY=y+j->crosshaire.cor_y;
-    return checkMouve(jeu->terrain,*newX,*newY);
+    struct joueur *nextj=jeu->ordrejeu.j;
+    for(int i=0;i<jeu->nbjoueur;i++)
+    {
+        if(j->crosshaire.cor_x==nextj->crosshaire.cor_x&&j->crosshaire.cor_y==nextj->crosshaire.cor_y&&j->nom!=nextj->nom)
+        {
+            return 0;
+        }
+    }
+    return 1;
 }
 void placerBariere(struct jeu *jeu,struct joueur *j)
 {
@@ -453,7 +522,53 @@ int testFinJeu(struct joueur *j)
     return 0;
 
 }
-void enregistrement(struct jeu j)
+int enregistrement(struct jeu jeu)
 {
+    FILE *f=NULL;
+    f=fopen("oldGame.txt","w");
+    if(f==NULL)
+    {
+        printf("Erreur ouverture fichier");
+        return -1;
+    }
+    else
+    {
+        fprintf(f,"%d\n",jeu.nbjoueur);
+        struct joueur *nextj=jeu.ordrejeu.j;
+        for(int i=0;i<jeu.nbjoueur;i++)
+        {
+            fprintf(f,"%s,%d,%c,%d,%d,%d,%c\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->startside);
+            nextj=nextj->next;
+        }
+        for(int i=0;i<20;i++)
+        {
+            fprintf(f,"%d,%d,%d,%c,%d\n",jeu.bariere[i].id,jeu.bariere[i].cord_x,jeu.bariere[i].cord_y,jeu.bariere[i].sens,jeu.bariere[i].active);
+        }
+        fprintf(f,"%d",jeu.etat);
+    }
+    fclose(f);
 
+}
+void affichageJoueur(struct jeu jeu)
+{
+    struct joueur *nextj=jeu.ordrejeu.j;
+    for(int i=0;i<jeu.nbjoueur;i++)
+    {
+        //printf("%d %d ",nextj->crosshaire.cor_x,nextj->crosshaire.cor_y);
+        //printf("%d %d",nextj->crosshaire.cor_y*4+6,nextj->crosshaire.cor_x*2+2);
+        if(nextj->crosshaire.cor_y!=-1)
+        {
+            gotoligcol(nextj->crosshaire.cor_y*2+2,nextj->crosshaire.cor_x*4+6);
+            printf("%c",nextj->crosshaire.type);
+        }
+        nextj=nextj->next;
+        gotoligcol(20,0);
+    }
+
+}
+void affichage(struct jeu jeu,struct joueur j)
+{
+    system("cls");
+    affichageTerrain(jeu.terrain);
+    affichageJoueur(jeu);
 }

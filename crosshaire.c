@@ -36,7 +36,8 @@ struct crosshaire creeCrossaire(void)
     t_crosshaire cross={0};
     cross.type=choixType();
     cross.cor_x=-1;
-    cross.cor_y=-1;
+    cross.cor_y=-1
+    ;
     return cross;
 }
 int getX(struct crosshaire c)

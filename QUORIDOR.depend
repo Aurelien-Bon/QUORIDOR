@@ -8,3 +8,49 @@
 
 1635182111 source:c:\users\aurel\documents\github\quoridor\terrain.c
 
+1636216158 source:c:\users\ceb\documents\github\quoridor\bariere.c
+	"bariere.h"
+	<stdio.h>
+
+1636216158 c:\users\ceb\documents\github\quoridor\bariere.h
+
+1636229515 source:c:\users\ceb\documents\github\quoridor\crosshaire.c
+	"crosshaire.h"
+	<stdlib.h>
+
+1636216158 c:\users\ceb\documents\github\quoridor\crosshaire.h
+
+1636559500 source:c:\users\ceb\documents\github\quoridor\jeu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu.h"
+	<windows.h>
+
+1636221191 c:\users\ceb\documents\github\quoridor\jeu.h
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+
+1636392754 c:\users\ceb\documents\github\quoridor\joueur.h
+	"crosshaire.h"
+
+1636221012 c:\users\ceb\documents\github\quoridor\terrain.h
+
+1636216158 source:c:\users\ceb\documents\github\quoridor\joueur.c
+	<stdio.h>
+	<stdlib.h>
+	"joueur.h"
+
+1636559500 source:c:\users\ceb\documents\github\quoridor\main.c
+	<stdio.h>
+	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
+
+1636383145 source:c:\users\ceb\documents\github\quoridor\terrain.c
+	"terrain.h"
+	<stdio.h>
+	<windows.h>
+

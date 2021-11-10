@@ -34,4 +34,6 @@ int deplacementchoisi(struct joueur *j,int x,int y,struct jeu *jeu,int *newX,int
 void placerBariere(struct jeu *jeu,struct joueur *j);
 void deplacementBariere(struct bariere *b,int x,int y,int direction);
 int testFinJeu(struct joueur *j);
+void affichageJoueur(struct jeu j);
+void affichage(struct jeu jeu,struct joueur j);
 #endif // JEU_H_INCLUDED

@@ -6,7 +6,7 @@ struct joueur creeJoueur(void)
 	t_joueur j = {0};
     j.nb_bariere=0;
     printf("Entrez votre pseudo(50 caractere max):");
-    scanf("%s",j.nom);
+    scanf_s("%s",j.nom);
     j.score=0;
     j.crosshaire=creeCrossaire();
     return j;

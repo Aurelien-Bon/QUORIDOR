@@ -17,7 +17,6 @@ struct terrain creeTerrain()
 {
     t_terrain grille={0x00};
     grille.grille[2][0]='1';
-    grille.grille[0][7]=0x00;
     grille.grille[4][0]='2';
     grille.grille[6][0]='3';
     grille.grille[8][0]='4';
@@ -97,8 +96,8 @@ void affichageTerrain( struct terrain terrain)
     {
         for(int j=0;j<40;j++)
         {
+            gotoligcol(i,j);
             printf("%c",terrain.grille[i][j]);
         }
-        printf("\n");
     }
 }

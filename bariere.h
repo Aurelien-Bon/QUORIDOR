@@ -2,13 +2,15 @@
 #define BARIERE_H_INCLUDED
 typedef struct bariere
 {
-	int cord_x;
-	int cord_y;
+	int cord_x1;
+	int cord_y1;
+	int cord_x2;
+	int cord_y2;
 	int id;
 	char sens;//h,b,g,d
 	int active;
 }t_bariere;
 struct bariere creeBariere(void);
-void afficherBariere(struct bariere b);
+void afficherBariereText(struct bariere b);
 
 #endif // BARIERE_H_INCLUDED

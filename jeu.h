@@ -1,5 +1,6 @@
 #ifndef JEU_H_INCLUDED
 #define JEU_H_INCLUDED
+#define _CRT_SECURE_NO_WARNINGS
 #include "joueur.h"
 #include "terrain.h"
 #include "bariere.h"
@@ -35,5 +36,7 @@ void placerBariere(struct jeu *jeu,struct joueur *j);
 void deplacementBariere(struct bariere *b,int x,int y,int direction);
 int testFinJeu(struct joueur *j);
 void affichageJoueur(struct jeu j);
+void afficherBariere(struct jeu jeu);
 void affichage(struct jeu jeu,struct joueur j);
+int toucheAppuiez();
 #endif // JEU_H_INCLUDED

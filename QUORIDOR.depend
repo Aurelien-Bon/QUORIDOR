@@ -1,12 +1,17 @@
 # depslib dependency file v1.0
-1635179449 source:c:\users\aurel\documents\github\quoridor\main.c
+1638465488 source:c:\users\aurel\documents\github\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
+
+1636928354 c:\users\aurel\documents\github\quoridor\terrain.h
+
+1636930721 source:c:\users\aurel\documents\github\quoridor\terrain.c
 	"terrain.h"
-
-1635178755 c:\users\aurel\documents\github\quoridor\terrain.h
-
-1635182111 source:c:\users\aurel\documents\github\quoridor\terrain.c
+	<stdio.h>
+	<windows.h>
 
 1636216158 source:c:\users\ceb\documents\github\quoridor\bariere.c
 	"bariere.h"
@@ -53,4 +58,37 @@
 	"terrain.h"
 	<stdio.h>
 	<windows.h>
+
+1638375968 source:c:\users\aurel\documents\github\quoridor\bariere.c
+	"bariere.h"
+	<stdio.h>
+
+1638375969 c:\users\aurel\documents\github\quoridor\bariere.h
+
+1636928354 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
+	"crosshaire.h"
+	<stdlib.h>
+
+1636928354 c:\users\aurel\documents\github\quoridor\crosshaire.h
+
+1638464399 source:c:\users\aurel\documents\github\quoridor\jeu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu.h"
+	<windows.h>
+	<string.h>
+
+1638438516 c:\users\aurel\documents\github\quoridor\jeu.h
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+
+1636928354 c:\users\aurel\documents\github\quoridor\joueur.h
+	"crosshaire.h"
+
+1636969640 source:c:\users\aurel\documents\github\quoridor\joueur.c
+	<stdio.h>
+	<stdlib.h>
+	"joueur.h"
 

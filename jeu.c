@@ -3,6 +3,7 @@
 #include <string.h>
 #include "jeu.h"
 #include <windows.h>
+#include <string.h>
 
 struct jeu creeJeu(void)
 {
@@ -116,14 +117,14 @@ void oldGame(struct jeu *jeu)
         jeu->nbjoueur=test;
         //printf("%d\n",test);
         char chaine[70];
-        char d[]=",";
+        char *d=',';
         if(jeu->nbjoueur==2)
         {
             jeu->ordrejeu.j=&jeu->j1;
             jeu->j1.next=&jeu->j2;
             jeu->j2.next=&jeu->j1;
         }
-        if(jeu->nbjoueur==4)
+        else if(jeu->nbjoueur==4)
         {
             jeu->ordrejeu.j=&jeu->j1;
             jeu->j1.next=&jeu->j2;
@@ -135,39 +136,42 @@ void oldGame(struct jeu *jeu)
         for(int i=0;i<jeu->nbjoueur;i++)
         {
             fscanf(f,"%s",&chaine);
-            char *p =strtok(chaine,d);
+            char *p = strtok(chaine, ",");
             strcpy(nextj->nom,p);
-            p=strtok(NULL,d);
+            p=strtok(NULL, ",");
             nextj->score=atoi(p);
-            p=strtok(NULL,d);
+            p=strtok(NULL, ",");
             nextj->crosshaire.type=p[0];
-            p=strtok(NULL,d);
+            p= strtok(NULL, ",");
             nextj->crosshaire.cor_x=atoi(p);
-            p=strtok(NULL,d);
+            p= strtok(NULL, ",");
             nextj->crosshaire.cor_y=atoi(p);
-            p=strtok(NULL,d);
+            p= strtok(NULL, ",");
             nextj->nb_bariere=atoi(p);
-            p=strtok(NULL,d);
+            p= strtok(NULL, ",");
             nextj->startside=atoi(p);
             nextj=nextj->next;
         }
+        printf("etd");
         for(int i=0;i<20;i++)
         {
             fscanf(f,"%s",&chaine);
-            char *p =strtok(chaine,d);
+            char *p=strtok(chaine, ",");
             jeu->bariere[i].id=atoi(p);
-            p=strtok(NULL,d);
-            jeu->bariere[i].cord_y=atoi(p);
-            p=strtok(NULL,d);
-            jeu->bariere[i].cord_y=atoi(p);
-            p=strtok(NULL,d);
+            p=strtok(NULL, ",");
+            jeu->bariere[i].cord_x1=atoi(p);
+            p=strtok(NULL, ",");
+            jeu->bariere[i].cord_y1=atoi(p);
+            p=strtok(NULL, ",");
+            jeu->bariere[i].cord_x2 = atoi(p);
+            p=strtok(NULL, ",");
+            jeu->bariere[i].cord_y2 = atoi(p);
+            p=strtok(NULL, ",");
             jeu->bariere[i].sens=p[0];
-            p=strtok(NULL,d);
+            p=strtok(NULL, ",");
             jeu->bariere[i].active=atoi(p);
-            p=strtok(NULL,d);
         }
-        fscanf(f,"%d",&
-               jeu->etat);
+        fscanf(f,"%d",&jeu->etat);
     }
     fclose(f);
 }
@@ -180,7 +184,7 @@ void startGame(int load)
         oldGame(&jeu);
     printf("jeu etat: %d, ",jeu.etat);
     //printf("next joueur: %s\n", jeu.ordrejeu.j->nom);
-    struct joueur *nextj=jeu.ordrejeu.j;
+    t_joueur *nextj=jeu.ordrejeu.j;
     int finJeu=0;
 
     while(finJeu==0)
@@ -284,9 +288,9 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
     do
     {
         affichage(*jeu,*j);
-        char c=' ';
+        char c;
         fflush(stdin);
-        c = getchar();
+        c = toucheAppuiez();
         int possible=0;
         switch(c)
         {
@@ -328,10 +332,10 @@ void deplacementCrossair(struct joueur *j,struct jeu *jeu)
                     newY=y;
                 }
                 break;
-            case ' ':
+            case 'v':
                 quitter=1;
                 break;
-            case 'e':
+            case ' ':
                 newX=x;
                 newY=y;
                 break;
@@ -372,30 +376,32 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
         }
         i++;
     }
-    jeu->bariere[nb].cord_x=0;
-    jeu->bariere[nb].cord_y=0;
+    jeu->bariere[nb].cord_x1=0;
+    jeu->bariere[nb].cord_y1=0;
+    jeu->bariere[nb].cord_x2 = 0;
+    jeu->bariere[nb].cord_y2 = 0;
     jeu->bariere[nb].sens='h';
     do
     {
-        afficherBariere(jeu->bariere[nb]);
+        //afficherBariere(jeu->bariere[nb]);
         char c;
         c=getc(stdin);
         switch (c)
         {
             case 'z': //monter
-                if(jeu->bariere[nb].cord_x-1<7&&jeu->bariere[nb].cord_x-1>=0)
+                if(jeu->bariere[nb].cord_x1-1<7&&jeu->bariere[nb].cord_x1-1>=0)
                     deplacementBariere(&jeu->bariere[nb],-1,0,0);
                 break;
             case 's'://decendre
-                if(jeu->bariere[nb].cord_x+1<7&&jeu->bariere[nb].cord_x+1>=0)
+                if(jeu->bariere[nb].cord_x1+1<7&&jeu->bariere[nb].cord_x1+1>=0)
                     deplacementBariere(&jeu->bariere[nb],1,0,0);
                 break;
             case 'q'://gauche
-                if(jeu->bariere[nb].cord_y-1<7&&jeu->bariere[nb].cord_y-1>=0)
+                if(jeu->bariere[nb].cord_y1-1<7&&jeu->bariere[nb].cord_y1-1>=0)
                     deplacementBariere(&jeu->bariere[nb],0,-1,0);
                 break;
             case 'd'://droite
-                if(jeu->bariere[nb].cord_y+1<7&&jeu->bariere[nb].cord_y+1>=0)
+                if(jeu->bariere[nb].cord_y1+1<7&&jeu->bariere[nb].cord_y1+1>=0)
                     deplacementBariere(&jeu->bariere[nb],0,1,0);
                 break;
             case 'e'://rotation droit
@@ -418,8 +424,8 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
         {
             if(jeu->bariere[i].id!=jeu->bariere[nb].id)
             {
-                if (jeu->bariere[i].cord_x == jeu->bariere[nb].cord_x) {
-                    if (jeu->bariere[i].cord_y == jeu->bariere[nb].cord_y &&
+                if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1) {
+                    if (jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1 &&
                         jeu->bariere[i].sens == jeu->bariere[nb].sens) {
 
                         printf("Un barriere est deja placer la! \n");
@@ -427,32 +433,32 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
                     }
                 }
                 if (jeu->bariere[i].sens == 'h') {
-                    if (jeu->bariere[i].cord_x - 1 == jeu->bariere[nb].cord_x - 1 &&
-                        jeu->bariere[i].cord_y == jeu->bariere[nb].cord_y &&
+                    if (jeu->bariere[i].cord_x1 - 1 == jeu->bariere[nb].cord_x1 - 1 &&
+                        jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1 &&
                         jeu->bariere[i].sens == jeu->bariere[nb].sens){
                         printf("Un barriere est deja placer la! \n");
                         jeu->bariere[nb].active = 2;
                     }
                 }
                 if (jeu->bariere[i].sens == 'd') {
-                    if (jeu->bariere[i].cord_x == jeu->bariere[nb].cord_x &&
-                        jeu->bariere[i].cord_y + 1 == jeu->bariere[nb].cord_y + 1 &&
+                    if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 &&
+                        jeu->bariere[i].cord_y1 + 1 == jeu->bariere[nb].cord_y1 + 1 &&
                         jeu->bariere[i].sens == jeu->bariere[nb].sens) {
                         printf("Un barriere est deja placer la! \n");
                         jeu->bariere[nb].active = 2;
                     }
                 }
                 if (jeu->bariere[i].sens == 'b') {
-                    if (jeu->bariere[i].cord_x + 1 == jeu->bariere[nb].cord_x + 1 &&
-                        jeu->bariere[i].cord_y == jeu->bariere[nb].cord_y &&
+                    if (jeu->bariere[i].cord_x1 + 1 == jeu->bariere[nb].cord_x1 + 1 &&
+                        jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1 &&
                         jeu->bariere[i].sens == jeu->bariere[nb].sens) {
                         printf("Un barriere est deja placer la! \n");
                         jeu->bariere[nb].active = 2;
                     }
                 }
                 if (jeu->bariere[i].sens == 'g') {
-                    if (jeu->bariere[i].cord_x == jeu->bariere[nb].cord_x &&
-                        jeu->bariere[i].cord_y - 1 == jeu->bariere[nb].cord_y - 1 &&
+                    if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 &&
+                        jeu->bariere[i].cord_y1 - 1 == jeu->bariere[nb].cord_y1 - 1 &&
                         jeu->bariere[i].sens == jeu->bariere[nb].sens) {
                         printf("Un barriere est deja placer la! \n");
                         jeu->bariere[nb].active = 2;
@@ -464,8 +470,8 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
 }
 void deplacementBariere(struct bariere *b,int x,int y,int direction)
 {
-    b->cord_x+=x;
-    b->cord_y+=y;
+    b->cord_x1+=x;
+    b->cord_y1+=y;
     if(direction==1)
     {
         if(b->sens=='h')
@@ -542,7 +548,7 @@ int enregistrement(struct jeu jeu)
         }
         for(int i=0;i<20;i++)
         {
-            fprintf(f,"%d,%d,%d,%c,%d\n",jeu.bariere[i].id,jeu.bariere[i].cord_x,jeu.bariere[i].cord_y,jeu.bariere[i].sens,jeu.bariere[i].active);
+            fprintf(f,"%d,%d,%d,%d,%d,%c,%d\n",jeu.bariere[i].id,jeu.bariere[i].cord_x1,jeu.bariere[i].cord_y1,jeu.bariere->cord_x2,jeu.bariere->cord_y2,jeu.bariere[i].sens,jeu.bariere[i].active);
         }
         fprintf(f,"%d",jeu.etat);
     }
@@ -566,9 +572,83 @@ void affichageJoueur(struct jeu jeu)
     }
 
 }
+void afficherBariere(struct jeu jeu)
+{
+    int x;
+    int y;
+    for(int i=0;i<20;i++)
+    {
+        if(jeu.bariere[i].active==1)
+        {
+            if(jeu.bariere[i].sens=='h')
+            {
+                gotoligcol(jeu.bariere[i].cord_y1*2+1,jeu.bariere[i].cord_x1*4+6);
+                printf("%c%c%c",0xcd,0xcd,0xec);
+
+            }
+            if(jeu.bariere[i].sens=='b')
+            {
+
+            }
+            if(jeu.bariere[i].sens=='d')
+            {
+
+            }
+            if(jeu.bariere[i].sens=='g')
+            {
+
+            }
+        }
+    }
+}
 void affichage(struct jeu jeu,struct joueur j)
 {
     system("cls");
     affichageTerrain(jeu.terrain);
+    afficherBariere(jeu);
     affichageJoueur(jeu);
+}
+
+int toucheAppuiez()
+{
+    int cara;
+    while(1)
+    {
+        if(GetAsyncKeyState(VK_UP)&0x27)
+        {
+            cara='z';
+            break;
+        }
+        if(GetAsyncKeyState(VK_LEFT)&0x25)
+        {
+            cara='q';
+            break;
+        }
+        if(GetAsyncKeyState(VK_RIGHT)&0x27)
+        {
+            cara='d';
+            break;
+        }
+        if(GetAsyncKeyState(VK_DOWN)&0x25)
+        {
+            cara='s';
+            break;
+        }
+        if(GetAsyncKeyState(VK_SPACE)&0x21)
+        {
+            cara=' ';
+            break;
+        }
+        if(GetAsyncKeyState(VK_RETURN)&0x0D)
+        {
+            cara='r';
+            break;
+        }
+        if(GetAsyncKeyState(VK_ESCAPE)&0x1B)
+        {
+            cara='v';
+            break;
+        }
+    }
+    return cara;
 }

@@ -3,7 +3,6 @@
 #include "jeu.h"
 #include <time.h>
 #include <windows.h>
-
 int main()
 {
     srand(time(NULL));
@@ -11,54 +10,36 @@ int main()
     //printf("QUORIDOR le projet trop eclate!\n");
     int chargerJeu=0;
     startGame(chargerJeu);
-    printf(",%c,",0x00);
-    while(1)
-    {
-        int cara=toucheAppuiez();
-        printf("%c\n",cara);
-    }
+    //printf(",%c,",0x00);
+    //testTouche();
+    //testFichier();
     return 0;
 }
-int toucheAppuiez()
+void testTouche()
 {
-    int cara;
     while(1)
     {
-        if(GetAsyncKeyState(VK_UP)&0x27)
-        {
-            cara='z';
-            break;
-        }
-        if(GetAsyncKeyState(VK_LEFT)&0x25)
-        {
-            cara='q';
-            break;
-        }
-        if(GetAsyncKeyState(VK_RIGHT)&0x27)
-        {
-            cara='d';
-            break;
-        }
-        if(GetAsyncKeyState(VK_DOWN)&0x25)
-        {
-            cara='s';
-            break;
-        }
-        if(GetAsyncKeyState(VK_SPACE)&0x20)
-        {
-            cara=' ';
-            break;
-        }
-        if(GetAsyncKeyState(VK_RETURN)&0x0D)
-        {
-            cara='r';
-            break;
-        }
-        if(GetAsyncKeyState(VK_ESCAPE)&0x1B)
-        {
-            cara='v';
-            break;
-        }
+        char c=toucheAppuiez();
+        printf("%c\n",c);
     }
-    return cara;
+}
+void testFichier()
+{
+    char *token;
+    char rest[50];
+    FILE* f=NULL;
+    f=fopen("oldGame.txt","r");
+    fscanf(f,"%s",rest);
+    while(!feof(f))
+    {
+        fscanf(f,"%s",&rest);
+        printf("%s\n",rest);
+        token = strtok(rest, ",");
+        for(int i=0;i<10;i++)
+        {
+            printf("%s,", token);
+            token = strtok(NULL, ",");
+        }
+        printf("\n");
+    }
 }

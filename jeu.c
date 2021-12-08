@@ -233,20 +233,22 @@ void startGame(int load)
 }
 int round(struct joueur *j, struct jeu *jeu)
 {
-    char message[100]="Salut toi";
+    char message[100]={' '};
     //affichierJoueur(*j);
 
     int choix=1;
     char c;
-    int quitter=0;
     int tourjouer=0;
     while(tourjouer==0)
     {
+        int quitter=0;
         while(quitter==0)
         {
             affichage(*jeu,*j);
             gotoligcol(25,40);
+            Color(4,0);
             printf("%s",message);
+            Color(15,0);
             gotoligcol(20,0);
             printf("         Deplacer mon pions     \n");
             printf("         Posser une bariere     \n");

@@ -10,18 +10,45 @@ struct jeu creeJeu(void)
     t_jeu jeu={0};
     return jeu;
 }
+struct lastmouve creeLastmouve()
+{
+    t_lastmouve mouve={0};
+    mouve.actif=0;
+    return mouve;
+}
 void newGame(struct jeu *jeu)
 {
     jeu->etat=0;
-    int nb;
-    do
+    jeu->mouve=creeLastmouve();
+    int nb=1;
+    int quitter=0;
+    char c;
+    while(quitter==0)
     {
+        system("cls");
         printf("A combien de joueur voulez vous jouer? \n");
-        printf("1- 2 joueurs\n");
-        printf("2- 4 joueurs\n");
-        fflush(stdin);
-        scanf("%d",&nb);
-    }while(nb<1 || nb>2);
+        printf("   2 joueurs\n");
+        printf("   4 joueurs\n");
+        gotoligcol(nb,0);
+        printf("->");
+        gotoligcol(nb,13);
+        printf("<-");
+        gotoligcol(0,0);
+        c=toucheAppuiez();
+        if(c=='z'&&nb>1)
+        {
+            nb--;
+        }
+        if(c=='s'&&nb<2)
+        {
+            nb++;
+        }
+        if(c==' ')
+        {
+            quitter=1;
+        }
+    }
+    system("cls");
     if(nb==1)
     {
         jeu->j1=creeJoueur();
@@ -103,6 +130,7 @@ void newGame(struct jeu *jeu)
 }
 void oldGame(struct jeu *jeu)
 {
+    jeu->terrain=creeTerrain();
     FILE *f=NULL;
     f=fopen("oldGame.txt","r");
     if(f==NULL)
@@ -152,7 +180,6 @@ void oldGame(struct jeu *jeu)
             nextj->startside=atoi(p);
             nextj=nextj->next;
         }
-        printf("etd");
         for(int i=0;i<20;i++)
         {
             fscanf(f,"%s",&chaine);
@@ -206,42 +233,150 @@ void startGame(int load)
 }
 int round(struct joueur *j, struct jeu *jeu)
 {
-    printf("C'est au tour de %s.\n",j->nom);
-    affichierJoueur(*j);
-    int choix;
-    do
+    char message[100]={' '};
+    //affichierJoueur(*j);
+
+    int choix=1;
+    char c;
+    int tourjouer=0;
+    while(tourjouer==0)
     {
-        printf("1-Deplacer mon pions \n");
-        printf("2-Posser une bariere\n");
-        printf("3-Ne rien faire\n");
-        printf("4-Annuler le derniere mouvement\n");
-        printf("5-Quitter\n");
-        printf("Quelle est votre choix: ");
-        scanf("%d",&choix);
-    }while(choix<1||choix>5);
-    switch (choix)
-    {
-        case 1:
-            deplacement(j,jeu);
-            break;
-        case 2:
-            if(j->nb_bariere>0)
+        int quitter=0;
+        while(quitter==0)
+        {
+            affichage(*jeu,*j);
+            gotoligcol(25,40);
+            Color(4,0);
+            printf("%s",message);
+            Color(15,0);
+            gotoligcol(20,0);
+            printf("         Deplacer mon pions     \n");
+            printf("         Posser une bariere     \n");
+            printf("           Ne rien faire        \n");
+            printf("   Annuler le derniere mouvement\n");
+            printf("              Quitter           \n");
+            gotoligcol(19+choix,0);
+            printf("->");
+            gotoligcol(19+choix,33);
+            printf("<-");
+            gotoligcol(30,0);
+            c=toucheAppuiez();
+            if(c=='z'&&choix>1)
             {
-                placerBariere(jeu,j);
+               choix--;
             }
-            else
+            if(c=='s'&&choix<5)
             {
-                printf("ERREUR: vous n'avez plus de bariere a placer");
+                choix++;
             }
-            break;
-        case 3:
-            break;
-        case 4:
-            break;
-        case 5:
-            enregistrement(*jeu);
-            return 1;
-            break;
+            if(c==' ')
+            {
+                quitter=1;
+            }
+        }
+        switch (choix)
+        {
+            case 1:
+                jeu->mouve.actif=1;
+                jeu->mouve.j1.crosshaire.cor_x=jeu->j1.crosshaire.cor_x;
+                jeu->mouve.j1.crosshaire.cor_y=jeu->j1.crosshaire.cor_y;
+                jeu->mouve.j2.crosshaire.cor_x=jeu->j2.crosshaire.cor_x;
+                jeu->mouve.j2.crosshaire.cor_y=jeu->j2.crosshaire.cor_y;
+                jeu->mouve.j3.crosshaire.cor_x=jeu->j3.crosshaire.cor_x;
+                jeu->mouve.j3.crosshaire.cor_y=jeu->j3.crosshaire.cor_y;
+                jeu->mouve.j4.crosshaire.cor_x=jeu->j4.crosshaire.cor_x;
+                jeu->mouve.j4.crosshaire.cor_y=jeu->j4.crosshaire.cor_y;
+                jeu->mouve.j1.nb_bariere=jeu->j1.nb_bariere;
+                jeu->mouve.j2.nb_bariere=jeu->j2.nb_bariere;
+                jeu->mouve.j3.nb_bariere=jeu->j3.nb_bariere;
+                jeu->mouve.j4.nb_bariere=jeu->j4.nb_bariere;
+                for(int i=0;i<20;i++)
+                {
+                    jeu->mouve.bariere[i].active=jeu->bariere[i].active;
+                    jeu->mouve.bariere[i].cord_x1=jeu->bariere[i].cord_x1;
+                    jeu->mouve.bariere[i].cord_x2=jeu->bariere[i].cord_x2;
+                    jeu->mouve.bariere[i].cord_y2=jeu->bariere[i].cord_y2;
+                    jeu->mouve.bariere[i].cord_y1=jeu->bariere[i].cord_y1;
+                    jeu->mouve.bariere[i].sens=jeu->bariere[i].sens;
+                }
+                deplacement(j,jeu);
+                tourjouer=1;
+                break;
+            case 2:
+                if(j->nb_bariere>0)
+                {
+                    jeu->mouve.actif=1;
+                    jeu->mouve.j1.crosshaire.cor_x=jeu->j1.crosshaire.cor_x;
+                    jeu->mouve.j1.crosshaire.cor_y=jeu->j1.crosshaire.cor_y;
+                    jeu->mouve.j2.crosshaire.cor_x=jeu->j2.crosshaire.cor_x;
+                    jeu->mouve.j2.crosshaire.cor_y=jeu->j2.crosshaire.cor_y;
+                    jeu->mouve.j3.crosshaire.cor_x=jeu->j3.crosshaire.cor_x;
+                    jeu->mouve.j3.crosshaire.cor_y=jeu->j3.crosshaire.cor_y;
+                    jeu->mouve.j4.crosshaire.cor_x=jeu->j4.crosshaire.cor_x;
+                    jeu->mouve.j4.crosshaire.cor_y=jeu->j4.crosshaire.cor_y;
+                    jeu->mouve.j1.nb_bariere=jeu->j1.nb_bariere;
+                    jeu->mouve.j2.nb_bariere=jeu->j2.nb_bariere;
+                    jeu->mouve.j3.nb_bariere=jeu->j3.nb_bariere;
+                    jeu->mouve.j4.nb_bariere=jeu->j4.nb_bariere;
+                    for(int i=0;i<20;i++)
+                    {
+                        jeu->mouve.bariere[i].active=jeu->bariere[i].active;
+                        jeu->mouve.bariere[i].cord_x1=jeu->bariere[i].cord_x1;
+                        jeu->mouve.bariere[i].cord_x2=jeu->bariere[i].cord_x2;
+                        jeu->mouve.bariere[i].cord_y2=jeu->bariere[i].cord_y2;
+                        jeu->mouve.bariere[i].cord_y1=jeu->bariere[i].cord_y1;
+                        jeu->mouve.bariere[i].sens=jeu->bariere[i].sens;
+                    }
+                    deplacement(j,jeu);
+                    placerBariere(jeu,j);
+                    tourjouer=1;
+                }
+                else
+                {
+                    strcpy(message,"ERREUR: vous n'avez plus de bariere a placer");
+                }
+                break;
+            case 3:
+                tourjouer=1;
+                break;
+            case 4:
+                if(jeu->mouve.actif!=0)
+                {
+                    jeu->mouve.actif=0;
+                    jeu->j1.crosshaire.cor_x=jeu->mouve.j1.crosshaire.cor_x;
+                    jeu->j1.crosshaire.cor_y=jeu->mouve.j1.crosshaire.cor_y;
+                    jeu->j2.crosshaire.cor_x=jeu->mouve.j2.crosshaire.cor_x;
+                    jeu->j2.crosshaire.cor_y=jeu->mouve.j2.crosshaire.cor_y;
+                    jeu->j3.crosshaire.cor_x=jeu->mouve.j3.crosshaire.cor_x;
+                    jeu->j3.crosshaire.cor_y=jeu->mouve.j3.crosshaire.cor_y;
+                    jeu->j4.crosshaire.cor_x=jeu->mouve.j4.crosshaire.cor_x;
+                    jeu->j4.crosshaire.cor_y=jeu->mouve.j4.crosshaire.cor_y;
+                    jeu->j1.nb_bariere=jeu->mouve.j1.nb_bariere;
+                    jeu->j2.nb_bariere=jeu->mouve.j2.nb_bariere;
+                    jeu->j3.nb_bariere=jeu->mouve.j3.nb_bariere;
+                    jeu->j4.nb_bariere=jeu->mouve.j4.nb_bariere;
+                    for(int i=0;i<20;i++)
+                    {
+                        jeu->bariere[i].active=jeu->mouve.bariere[i].active;
+                        jeu->bariere[i].cord_x1=jeu->mouve.bariere[i].cord_x1;
+                        jeu->bariere[i].cord_x2=jeu->mouve.bariere[i].cord_x2;
+                        jeu->bariere[i].cord_y2=jeu->mouve.bariere[i].cord_y2;
+                        jeu->bariere[i].cord_y1=jeu->mouve.bariere[i].cord_y1;
+                        jeu->bariere[i].sens=jeu->mouve.bariere[i].sens;
+                    }
+                    tourjouer=1;
+                }
+                else
+                {
+                    strcpy(message,"Il n'y a pas eu de mouvement sur le plateau pour l'instant");
+                }
+                break;
+            case 5:
+                enregistrement(*jeu);
+                tourjouer=1;
+                return 1;
+                break;
+        }
     }
     return 0;
 }
@@ -274,94 +409,117 @@ void deplacement(struct joueur *j,struct jeu *jeu)
     }
     else
     {
-        deplacementCrossair(j,jeu);
+        int quitter=0;
+        do
+        {
+            affichage(*jeu,*j);
+            char c;
+            fflush(stdin);
+            c = toucheAppuiez();
+            int possible=0;
+            fflush(stdin);
+            int debug;
+            switch(c)
+            {
+                case 'q':
+                    if(j->crosshaire.cor_x-1>=0)//on sort par la gauche
+                    {
+                        if(j->crosshaire.cor_x-1>x-2&&j->crosshaire.cor_y==y)
+                        {
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x-1,j->crosshaire.cor_y,'d')!=0)
+                            {
+                               j->crosshaire.cor_x-=1;
+                            }
+                        }
+                    }
+                    break;
+                case 'd':
+                    if(j->crosshaire.cor_x+1<9)//on sort par la droit
+                        if(j->crosshaire.cor_x+1<x+2&&j->crosshaire.cor_y==y)
+                        {
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'g')!=0)
+                            {
+                               j->crosshaire.cor_x+=1;
+                            }
+                                /*
+                                if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'q')==2)
+                                {
+                                   j->crosshaire.cor_x+=2;
+                                }
+                                else
+                                {
+                                   j->crosshaire.cor_x+=1;
+                                }*/
+                        }
+                    break;
+                case 'z':
+                    if(j->crosshaire.cor_y-1>=0)//on sort par le haut
+                        if(j->crosshaire.cor_y-1>y-2&&j->crosshaire.cor_x==x)
+                        {
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'h')!=0)
+                            {
+                               j->crosshaire.cor_y-=1;
+                            }
+                        }
+                    break;
+                case 's':
+                    if(j->crosshaire.cor_y+1<9)//on sort par le bas
+                        if(j->crosshaire.cor_y+1<y+2&&j->crosshaire.cor_x==x)
+                        {
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'b')!=0)
+                            {
+                               j->crosshaire.cor_y+=1;
+                            }
+                        }
+                    break;
+                case 'v':
+                    quitter=1;
+                    j->crosshaire.cor_x=x;
+                    j->crosshaire.cor_y=y;
+                    break;
+                case ' ':
+                    quitter=1;
+                    break;
+            }
+        }while(quitter==0);
     }
 }
-void deplacementCrossair(struct joueur *j,struct jeu *jeu)
+int deplacementPossible(struct jeu jeu, struct joueur j, int x, int y,char sens)
 {
-    int x=j->crosshaire.cor_x;
-    int y=j->crosshaire.cor_y;
-    printf("%d,%d\n",x,y);
-    int newX=x;
-    int newY=y;
-    int quitter=0;
-    do
+    int pos = 1;
+    for(int i=0;i<20;i++)//pas de bariere sur le chemin
     {
-        affichage(*jeu,*j);
-        char c;
-        fflush(stdin);
-        c = toucheAppuiez();
-        int possible=0;
-        switch(c)
+        if(jeu.bariere[i].active==1)
         {
-            case 'z':
-                if(newX-1>=0&&newX-1<9)
+            if(jeu.bariere[i].sens=='h'&&sens=='b')
+            {
+                if(jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y-1||jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y-1)
                 {
-                    possible=deplacementchoisi(j,0,-1,jeu,&newX,&newY);
+                    pos = 0;
                 }
-                else
+            }
+            if(jeu.bariere[i].sens=='b'&&sens=='b')
+            {
+                if(jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y||jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y)
                 {
-                    newX=x;
-                    newY=y;
+                    pos = 0;
                 }
-                break;
-            case 's':
-                if(newX+1>=0&&newX+1<9)
-                    possible=deplacementchoisi(j,0,1,jeu,&newX,&newY);
-                else
-                {
-                    newX=x;
-                    newY=y;
-                }
-                break;
-            case 'q':
-                if(newY-1>=0&&newY-1<9)
-                    possible=deplacementchoisi(j,-1,0,jeu,&newX,&newY);
-                else
-                {
-                    newX=x;
-                    newY=y;
-                }
-                break;
-            case 'd':
-                if(newY+1>=0&&newY+1<9)
-                    possible=deplacementchoisi(j,1,0,jeu,&newX,&newY);
-                else
-                {
-                    newX=x;
-                    newY=y;
-                }
-                break;
-            case 'v':
-                quitter=1;
-                break;
-            case ' ':
-                newX=x;
-                newY=y;
-                break;
-        }
-        if(possible==1)
-        {
-            j->crosshaire.cor_x=newX;
-            j->crosshaire.cor_y=newY;
-        }
-        printf("%d,%d\n",newX,newY);
-
-    }while(quitter==0);
-}
-int deplacementchoisi(struct joueur *j,int x,int y,struct jeu *jeu,int *newX,int *newY)
-{
-    *newX=x+j->crosshaire.cor_x;
-    *newY=y+j->crosshaire.cor_y;
-    struct joueur *nextj=jeu->ordrejeu.j;
-    for(int i=0;i<jeu->nbjoueur;i++)
-    {
-        if(j->crosshaire.cor_x==nextj->crosshaire.cor_x&&j->crosshaire.cor_y==nextj->crosshaire.cor_y&&j->nom!=nextj->nom)
-        {
-            return 0;
+            }
         }
     }
-    return 1;
+    struct joueur *nextj=jeu.ordrejeu.j;
+    for(int i=0;i<jeu.nbjoueur;i++)//piont enemie sur le chemin
+    {
+        if(strcmp(nextj->nom,j.nom)!=0)
+        {
+            if(nextj->crosshaire.cor_x==x&&nextj->crosshaire.cor_y==y)
+            {
+                pos = 0;
+            }
+        }
+        nextj=nextj->next;
+    }
+    return pos;
 }
 void placerBariere(struct jeu *jeu,struct joueur *j)
 {
@@ -378,136 +536,240 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
     }
     jeu->bariere[nb].cord_x1=0;
     jeu->bariere[nb].cord_y1=0;
-    jeu->bariere[nb].cord_x2 = 0;
+    jeu->bariere[nb].cord_x2 = 1;
     jeu->bariere[nb].cord_y2 = 0;
     jeu->bariere[nb].sens='h';
+    jeu->bariere[nb].active=2;
     do
     {
-        //afficherBariere(jeu->bariere[nb]);
+        affichage(*jeu,*j);
         char c;
-        c=getc(stdin);
+        fflush(stdin);
+        c = toucheAppuiez();
         switch (c)
         {
-            case 'z': //monter
-                if(jeu->bariere[nb].cord_x1-1<7&&jeu->bariere[nb].cord_x1-1>=0)
-                    deplacementBariere(&jeu->bariere[nb],-1,0,0);
-                break;
-            case 's'://decendre
-                if(jeu->bariere[nb].cord_x1+1<7&&jeu->bariere[nb].cord_x1+1>=0)
-                    deplacementBariere(&jeu->bariere[nb],1,0,0);
-                break;
-            case 'q'://gauche
-                if(jeu->bariere[nb].cord_y1-1<7&&jeu->bariere[nb].cord_y1-1>=0)
-                    deplacementBariere(&jeu->bariere[nb],0,-1,0);
+            case 'q': //gauche
+                if(jeu->bariere[nb].cord_x1-1<8&&jeu->bariere[nb].cord_x1-1>=0)
+                    deplacementBariere(jeu,nb,-1,0,0);
                 break;
             case 'd'://droite
-                if(jeu->bariere[nb].cord_y1+1<7&&jeu->bariere[nb].cord_y1+1>=0)
-                    deplacementBariere(&jeu->bariere[nb],0,1,0);
+                if(jeu->bariere[nb].cord_x1+1<8&&jeu->bariere[nb].cord_x1+1>=0)
+                    deplacementBariere(jeu,nb,1,0,0);
                 break;
-            case 'e'://rotation droit
-                deplacementBariere(&jeu->bariere[nb],0,0,1);
-                break;//rotation gauche
-            case 'a'://rotation droite
-                deplacementBariere(&jeu->bariere[nb],0,0,-1);
+            case 'z'://haut
+                if(jeu->bariere[nb].cord_y1-1<8&&jeu->bariere[nb].cord_y1-1>=0)
+                    deplacementBariere(jeu,nb,0,-1,0);
+                break;
+            case 's'://bas
+                if(jeu->bariere[nb].cord_y1+1<8&&jeu->bariere[nb].cord_y1+1>=0)
+                    deplacementBariere(jeu,nb,0,1,0);
+                break;
+            case 'e'://rotation droite
+                deplacementBariere(jeu,nb,0,0,1);
+                break;
+            case 'a'://rotation gauche
+                deplacementBariere(jeu,nb,0,0,-1);
                 break;
             case ' '://valider
-                placer=1;
-                jeu->bariere[nb].active=1;
-                j->nb_bariere--;
+                if(jeu->bariere[nb].active==2)
+                {
+                    placer=1;
+                    jeu->bariere[nb].active=1;
+                    j->nb_bariere--;
+                }
                 break;
-            case 'r'://annuler
+            case 'v'://annuler
                 placer=1;
-                jeu->bariere[nb].active=2;
+                jeu->bariere[nb].active=0;
                 break;
         }
-        for(int i=0;i<20;i++)
+        gotoligcol(30,0);
+        ///VERIF SI ON PEUT POSSER LA BARIERE
+        if(jeu->bariere[nb].active!=0)
         {
-            if(jeu->bariere[i].id!=jeu->bariere[nb].id)
+            for(int i=0;i<20;i++)
             {
-                if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1) {
-                    if (jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1 &&
-                        jeu->bariere[i].sens == jeu->bariere[nb].sens) {
-
-                        printf("Un barriere est deja placer la! \n");
-                        jeu->bariere[nb].active = 2;
+                //printf("nb: %d,sens:%c,x1:%d,y1:%d,x2:%d,y2:%d \n ",jeu->bariere[i].id,jeu->bariere[i].sens,jeu->bariere[i].cord_x1,jeu->bariere[i].cord_y1,jeu->bariere[i].cord_x2,jeu->bariere[i].cord_y2);
+                if(jeu->bariere[i].id!=nb+1&&jeu->bariere[i].active==1)
+                {
+                    if(jeu->bariere[i].sens==jeu->bariere[nb].sens)
+                    {
+                        if(jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
                     }
-                }
-                if (jeu->bariere[i].sens == 'h') {
-                    if (jeu->bariere[i].cord_x1 - 1 == jeu->bariere[nb].cord_x1 - 1 &&
-                        jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1 &&
-                        jeu->bariere[i].sens == jeu->bariere[nb].sens){
-                        printf("Un barriere est deja placer la! \n");
-                        jeu->bariere[nb].active = 2;
+                    if(jeu->bariere[i].sens=='h'&&jeu->bariere[nb].sens=='b')
+                    {
+                        if(jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y1-1 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y2-1 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y2-1 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y1-1 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
                     }
-                }
-                if (jeu->bariere[i].sens == 'd') {
-                    if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 &&
-                        jeu->bariere[i].cord_y1 + 1 == jeu->bariere[nb].cord_y1 + 1 &&
-                        jeu->bariere[i].sens == jeu->bariere[nb].sens) {
-                        printf("Un barriere est deja placer la! \n");
-                        jeu->bariere[nb].active = 2;
+                    if(jeu->bariere[i].sens=='b'&&jeu->bariere[nb].sens=='h')
+                    {
+                        if(jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1-1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y1-1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y2-1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y2-1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
                     }
-                }
-                if (jeu->bariere[i].sens == 'b') {
-                    if (jeu->bariere[i].cord_x1 + 1 == jeu->bariere[nb].cord_x1 + 1 &&
-                        jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1 &&
-                        jeu->bariere[i].sens == jeu->bariere[nb].sens) {
-                        printf("Un barriere est deja placer la! \n");
-                        jeu->bariere[nb].active = 2;
+                    if(jeu->bariere[i].sens=='g'&&jeu->bariere[nb].sens=='d')
+                    {
+                        if(jeu->bariere[i].cord_x1-1 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2-1 == jeu->bariere[nb].cord_x1 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2-1 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if (jeu->bariere[i].cord_x1-1 == jeu->bariere[nb].cord_x2 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
                     }
-                }
-                if (jeu->bariere[i].sens == 'g') {
-                    if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1 &&
-                        jeu->bariere[i].cord_y1 - 1 == jeu->bariere[nb].cord_y1 - 1 &&
-                        jeu->bariere[i].sens == jeu->bariere[nb].sens) {
-                        printf("Un barriere est deja placer la! \n");
-                        jeu->bariere[nb].active = 2;
+                    if(jeu->bariere[i].sens=='d'&&jeu->bariere[nb].sens=='g')
+                    {
+                        if(jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x1-1 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x1-1 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y1)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if(jeu->bariere[i].cord_x2 == jeu->bariere[nb].cord_x2-1 && jeu->bariere[i].cord_y2 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
+                        if (jeu->bariere[i].cord_x1 == jeu->bariere[nb].cord_x2-1 && jeu->bariere[i].cord_y1 == jeu->bariere[nb].cord_y2)
+                        {
+                            jeu->bariere[nb].active = 3;
+                        }
                     }
                 }
             }
         }
     }while(placer==0);
 }
-void deplacementBariere(struct bariere *b,int x,int y,int direction)
+void deplacementBariere(struct jeu *j,int nb,int x,int y,int direction)
 {
-    b->cord_x1+=x;
-    b->cord_y1+=y;
+    j->bariere[nb].cord_x1+=x;
+    j->bariere[nb].cord_y1+=y;
+    j->bariere[nb].active=2;
+
+    if(j->bariere[nb].sens=='h')
+    {
+        j->bariere[nb].cord_x2+=x;
+        j->bariere[nb].cord_y2+=y;
+    }
+    else if(j->bariere[nb].sens=='b')
+    {
+        j->bariere[nb].cord_x2+=x;
+        j->bariere[nb].cord_y2+=y;
+    }
+    else if(j->bariere[nb].sens=='g')
+    {
+        j->bariere[nb].cord_x2+=x;
+        j->bariere[nb].cord_y2+=y;
+    }
+    else if(j->bariere[nb].sens=='d')
+    {
+        j->bariere[nb].cord_x2+=x;
+        j->bariere[nb].cord_y2+=y;
+    }
     if(direction==1)
     {
-        if(b->sens=='h')
+        if(j->bariere[nb].sens=='h')
         {
-            b->sens='d';
+            j->bariere[nb].sens='d';
+            j->bariere[nb].cord_x2-=1;
+            j->bariere[nb].cord_y2+=1;
         }
-        else if(b->sens=='b')
+        else if(j->bariere[nb].sens=='b')
         {
-            b->sens='g';
+            j->bariere[nb].sens='g';
+            j->bariere[nb].cord_x2-=1;
+            j->bariere[nb].cord_y2+=1;
         }
-        else if(b->sens=='g')
+        else if(j->bariere[nb].sens=='g')
         {
-            b->sens='h';
+            j->bariere[nb].sens='h';
+            j->bariere[nb].cord_x2+=1;
+            j->bariere[nb].cord_y2-=1;
         }
-        else if(b->sens=='d')
+        else if(j->bariere[nb].sens=='d')
         {
-            b->sens='b';
+            j->bariere[nb].sens='b';
+            j->bariere[nb].cord_x2+=1;
+            j->bariere[nb].cord_y2-=1;
         }
     }
     if(direction==-1)
     {
-        if(b->sens=='h')
+        if(j->bariere[nb].sens=='h')
         {
-            b->sens='g';
+            j->bariere[nb].sens='g';
+            j->bariere[nb].cord_x2-=1;
+            j->bariere[nb].cord_y2+=1;
         }
-        else if(b->sens=='b')
+        else if(j->bariere[nb].sens=='b')
         {
-            b->sens='d';
+            j->bariere[nb].sens='d';
+            j->bariere[nb].cord_x2-=1;
+            j->bariere[nb].cord_y2+=1;
         }
-        else if(b->sens=='g')
+        else if(j->bariere[nb].sens=='g')
         {
-            b->sens='b';
+            j->bariere[nb].sens='b';
+            j->bariere[nb].cord_x2+=1;
+            j->bariere[nb].cord_y2-=1;
         }
-        else if(b->sens=='d')
+        else if(j->bariere[nb].sens=='d')
         {
-            b->sens='h';
+            j->bariere[nb].sens='h';
+            j->bariere[nb].cord_x2+=1;
+            j->bariere[nb].cord_y2-=1;
         }
     }
 }
@@ -548,7 +810,7 @@ int enregistrement(struct jeu jeu)
         }
         for(int i=0;i<20;i++)
         {
-            fprintf(f,"%d,%d,%d,%d,%d,%c,%d\n",jeu.bariere[i].id,jeu.bariere[i].cord_x1,jeu.bariere[i].cord_y1,jeu.bariere->cord_x2,jeu.bariere->cord_y2,jeu.bariere[i].sens,jeu.bariere[i].active);
+            fprintf(f,"%d,%d,%d,%d,%d,%c,%d\n",jeu.bariere[i].id,jeu.bariere[i].cord_x1,jeu.bariere[i].cord_y1,jeu.bariere[i].cord_x2,jeu.bariere[i].cord_y2,jeu.bariere[i].sens,jeu.bariere[i].active);
         }
         fprintf(f,"%d",jeu.etat);
     }
@@ -578,27 +840,51 @@ void afficherBariere(struct jeu jeu)
     int y;
     for(int i=0;i<20;i++)
     {
-        if(jeu.bariere[i].active==1)
+        if(jeu.bariere[i].active!=0)
         {
+            if(jeu.bariere[i].active==1)
+            {
+                Color(15,0);
+            }
+            if(jeu.bariere[i].active==2)
+            {
+                Color(2,0);
+            }
+            if(jeu.bariere[i].active==3)
+            {
+                Color(4,0);
+            }
+
             if(jeu.bariere[i].sens=='h')
             {
-                gotoligcol(jeu.bariere[i].cord_y1*2+1,jeu.bariere[i].cord_x1*4+6);
-                printf("%c%c%c",0xcd,0xcd,0xec);
-
+                gotoligcol(jeu.bariere[i].cord_y1*2+1,jeu.bariere[i].cord_x1*4+5);
+                printf("%c%c%c%c%c%c%c",0xcd,0xcd,0xcd,0xce,0xcd,0xcd,0xcd);
             }
             if(jeu.bariere[i].sens=='b')
             {
-
+                gotoligcol(jeu.bariere[i].cord_y1*2+3,jeu.bariere[i].cord_x1*4+5);
+                printf("%c%c%c%c%c%c%c",0xcd,0xcd,0xcd,0xce,0xcd,0xcd,0xcd);
             }
             if(jeu.bariere[i].sens=='d')
             {
-
+                gotoligcol(jeu.bariere[i].cord_y1*2+2,jeu.bariere[i].cord_x1*4+8);
+                printf("%c",0xba);
+                gotoligcol(jeu.bariere[i].cord_y1*2+3,jeu.bariere[i].cord_x1*4+8);
+                printf("%c",0xce);
+                gotoligcol(jeu.bariere[i].cord_y1*2+4,jeu.bariere[i].cord_x1*4+8);
+                printf("%c",0xba);
             }
             if(jeu.bariere[i].sens=='g')
             {
-
+                gotoligcol(jeu.bariere[i].cord_y1*2+2,jeu.bariere[i].cord_x1*4+4);
+                printf("%c",0xba);
+                gotoligcol(jeu.bariere[i].cord_y1*2+3,jeu.bariere[i].cord_x1*4+4);
+                printf("%c",0xce);
+                gotoligcol(jeu.bariere[i].cord_y1*2+4,jeu.bariere[i].cord_x1*4+4);
+                printf("%c",0xba);
             }
         }
+        Color(15,0);
     }
 }
 void affichage(struct jeu jeu,struct joueur j)
@@ -607,6 +893,29 @@ void affichage(struct jeu jeu,struct joueur j)
     affichageTerrain(jeu.terrain);
     afficherBariere(jeu);
     affichageJoueur(jeu);
+    gotoligcol(0,50);
+    printf("Nombre de joueur: %d",jeu.nbjoueur);
+    gotoligcol(4,50);
+    printf("Joueur: %s",j.nom);
+    gotoligcol(8,50);
+    printf("Score Partie: %d",j.score);
+    gotoligcol(12,50);
+    printf("Jeton: %c",j.crosshaire.type);
+    gotoligcol(16,50);
+    printf("Bariere restante: %d",j.nb_bariere);
+    gotoligcol(19,50);
+    printf("    [%c]",0x18);
+    gotoligcol(20,50);
+    printf("[<-][%c][->] pour se deplacer",0x19);
+    gotoligcol(21,50);
+    printf("  [SPACE]   pour valider");
+    gotoligcol(22,50);
+    printf("  [ESCAPE]  pour annuer");
+    gotoligcol(23,50);
+    printf("  [CRTL]  pour rotation anti-horraire");
+    gotoligcol(24,50);
+    printf("  [ALT]  pour rotation horraire");
+    gotoligcol(20,0);
 }
 
 int toucheAppuiez()
@@ -647,6 +956,16 @@ int toucheAppuiez()
         if(GetAsyncKeyState(VK_ESCAPE)&0x1B)
         {
             cara='v';
+            break;
+        }
+        if(GetAsyncKeyState(VK_CONTROL)&0x11)
+        {
+            cara='a';
+            break;
+        }
+        if(GetAsyncKeyState(VK_MENU)&0x11)
+        {
+            cara='e';
             break;
         }
     }

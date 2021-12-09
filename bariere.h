@@ -12,5 +12,6 @@ typedef struct bariere
 }t_bariere;
 struct bariere creeBariere(void);
 void afficherBariereText(struct bariere b);
+void Color(int couleurDuTexte,int couleurDeFond);
 
 #endif // BARIERE_H_INCLUDED

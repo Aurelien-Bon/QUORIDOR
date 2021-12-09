@@ -12,4 +12,5 @@ typedef struct joueur
 }t_joueur;
 struct joueur creeJoueur(void);
 void affichierJoueur(struct joueur j);
+int getScore(char *pseudo);
 #endif // JOUEUR_H_INCLUDED

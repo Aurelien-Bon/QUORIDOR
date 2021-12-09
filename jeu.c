@@ -209,7 +209,7 @@ void startGame(int load)
         newGame(&jeu);
     else
         oldGame(&jeu);
-    printf("jeu etat: %d, ",jeu.etat);
+    //printf("jeu etat: %d, ",jeu.etat);
     //printf("next joueur: %s\n", jeu.ordrejeu.j->nom);
     t_joueur *nextj=jeu.ordrejeu.j;
     int finJeu=0;
@@ -327,7 +327,6 @@ int round(struct joueur *j, struct jeu *jeu)
                         jeu->mouve.bariere[i].cord_y1=jeu->bariere[i].cord_y1;
                         jeu->mouve.bariere[i].sens=jeu->bariere[i].sens;
                     }
-                    deplacement(j,jeu);
                     placerBariere(jeu,j);
                     tourjouer=1;
                 }
@@ -441,15 +440,6 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                             {
                                j->crosshaire.cor_x+=1;
                             }
-                                /*
-                                if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'q')==2)
-                                {
-                                   j->crosshaire.cor_x+=2;
-                                }
-                                else
-                                {
-                                   j->crosshaire.cor_x+=1;
-                                }*/
                         }
                     break;
                 case 'z':
@@ -688,6 +678,43 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
                         }
                     }
                 }
+            }
+            struct joueur *nextj=jeu->ordrejeu.j;
+            for(int i=0;i<jeu->nbjoueur;i++)
+            {
+                if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
+                {
+                    jeu->bariere[nb].active = 3;
+                }
+                if(jeu->bariere[nb].sens=='h')
+                {
+                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1-1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2-1==nextj->crosshaire.cor_y)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                if(jeu->bariere[nb].sens=='b')
+                {
+                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y-1 || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y-1)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                if(jeu->bariere[nb].sens=='g')
+                {
+                    if(jeu->bariere[nb].cord_x1-1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2-1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                if(jeu->bariere[nb].sens=='d')
+                {
+                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x-1&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x-1&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                nextj=nextj->next;
             }
         }
     }while(placer==0);

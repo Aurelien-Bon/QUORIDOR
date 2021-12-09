@@ -94,33 +94,35 @@
 	<stdlib.h>
 	"joueur.h"
 
-1638874122 source:c:\users\anwar\onedrive\desktop\quoridor\main.c
+1639066617 source:c:\users\anwar\onedrive\desktop\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
 	<time.h>
 	<windows.h>
 
-1638874122 c:\users\anwar\onedrive\desktop\quoridor\terrain.h
+1639066034 c:\users\anwar\onedrive\desktop\quoridor\terrain.h
 
-1638874122 source:c:\users\anwar\onedrive\desktop\quoridor\terrain.c
+1639066034 source:c:\users\anwar\onedrive\desktop\quoridor\terrain.c
 	"terrain.h"
 	<stdio.h>
 	<windows.h>
 
-1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\bariere.c
+1639066033 source:c:\users\anwar\onedrive\desktop\quoridor\bariere.c
 	"bariere.h"
 	<stdio.h>
+	<stdlib.h>
+	<windows.h>
 
-1638874121 c:\users\anwar\onedrive\desktop\quoridor\bariere.h
+1639066033 c:\users\anwar\onedrive\desktop\quoridor\bariere.h
 
-1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\crosshaire.c
+1639066034 source:c:\users\anwar\onedrive\desktop\quoridor\crosshaire.c
 	"crosshaire.h"
 	<stdlib.h>
 
-1638874121 c:\users\anwar\onedrive\desktop\quoridor\crosshaire.h
+1639066034 c:\users\anwar\onedrive\desktop\quoridor\crosshaire.h
 
-1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\jeu.c
+1639066537 source:c:\users\anwar\onedrive\desktop\quoridor\jeu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -128,15 +130,15 @@
 	<windows.h>
 	<string.h>
 
-1638874121 c:\users\anwar\onedrive\desktop\quoridor\jeu.h
+1639066034 c:\users\anwar\onedrive\desktop\quoridor\jeu.h
 	"joueur.h"
 	"terrain.h"
 	"bariere.h"
 
-1638874121 c:\users\anwar\onedrive\desktop\quoridor\joueur.h
+1639066537 c:\users\anwar\onedrive\desktop\quoridor\joueur.h
 	"crosshaire.h"
 
-1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\joueur.c
+1639066537 source:c:\users\anwar\onedrive\desktop\quoridor\joueur.c
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"

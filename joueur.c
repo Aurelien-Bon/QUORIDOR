@@ -9,6 +9,7 @@ struct joueur creeJoueur(void)
     scanf_s("%s",j.nom);
     j.score=0;
     j.crosshaire=creeCrossaire();
+    j.chrono=0;
     return j;
 }
 void affichierJoueur(struct joueur j)

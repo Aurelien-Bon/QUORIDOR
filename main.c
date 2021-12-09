@@ -8,7 +8,11 @@ int main()
     srand(time(NULL));
     //menu();
     //printf("QUORIDOR le projet trop eclate!\n");
+<<<<<<< HEAD
     printf("menu");
+=======
+    //prinft("menu");
+>>>>>>> a2c99151054df60ad2b0724c25c768c44711b159
     int chargerJeu=1;
     startGame(chargerJeu);
     //printf(",%c,",0x00);

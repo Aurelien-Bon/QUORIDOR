@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1638983433 source:c:\users\aurel\documents\github\quoridor\main.c
+1639069632 source:c:\users\aurel\documents\github\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
@@ -73,7 +73,7 @@
 
 1636928354 c:\users\aurel\documents\github\quoridor\crosshaire.h
 
-1638983318 source:c:\users\aurel\documents\github\quoridor\jeu.c
+1639070150 source:c:\users\aurel\documents\github\quoridor\jeu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -86,10 +86,10 @@
 	"terrain.h"
 	"bariere.h"
 
-1636928354 c:\users\aurel\documents\github\quoridor\joueur.h
+1639065736 c:\users\aurel\documents\github\quoridor\joueur.h
 	"crosshaire.h"
 
-1636969640 source:c:\users\aurel\documents\github\quoridor\joueur.c
+1639069632 source:c:\users\aurel\documents\github\quoridor\joueur.c
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"

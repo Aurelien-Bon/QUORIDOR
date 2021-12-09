@@ -92,3 +92,50 @@
 	<stdlib.h>
 	"joueur.h"
 
+1638874122 source:c:\users\anwar\onedrive\desktop\quoridor\main.c
+	<stdio.h>
+	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
+
+1638874122 c:\users\anwar\onedrive\desktop\quoridor\terrain.h
+
+1638874122 source:c:\users\anwar\onedrive\desktop\quoridor\terrain.c
+	"terrain.h"
+	<stdio.h>
+	<windows.h>
+
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\bariere.c
+	"bariere.h"
+	<stdio.h>
+
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\bariere.h
+
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\crosshaire.c
+	"crosshaire.h"
+	<stdlib.h>
+
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\crosshaire.h
+
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\jeu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu.h"
+	<windows.h>
+	<string.h>
+
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\jeu.h
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\joueur.h
+	"crosshaire.h"
+
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\joueur.c
+	<stdio.h>
+	<stdlib.h>
+	"joueur.h"
+

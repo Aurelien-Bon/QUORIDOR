@@ -975,6 +975,8 @@ void affichage(struct jeu jeu,struct joueur j)
     gotoligcol(24,50);
     printf("  [ALT]  pour rotation horaire");
     gotoligcol(20,0);
+    gotoligcol(10,50);
+    printf("%d sec",j.chrono);
 }
 
 int toucheAppuiez()

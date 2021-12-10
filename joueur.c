@@ -57,7 +57,7 @@ int getScore(char *pseudo)
         }
         else
         {
-            fprintf(f,"%s,0\n",pseudo);
+            fprintf(f,"\n%s,0",pseudo);
             score=0;
         }
         fclose(f);
@@ -72,8 +72,8 @@ void setScore(char *pseudo,int score)
     char ligne[70];
     char pseudoLue[50];
     char *token;
-    char buffer[100][70];
-    f=fopen("joueur.txt","r+");
+    char buffer[100][100]={0};
+    f=fopen("joueur.txt","r");
     if(f==NULL)
     {
         printf("Erreur ouverture fichier");
@@ -82,8 +82,47 @@ void setScore(char *pseudo,int score)
     {
         while(!feof(f))
         {
-            fscanf(f,"%s",&ligne);
-            strcpy(buffer[nb],ligne);
+            fscanf(f,"%s",buffer[nb]);
+            //printf("%d: %s \n",nb,buffer[nb]);
+            strcpy(ligne,buffer[nb]);
+            token = strtok(ligne, ",");
+            if(token!=NULL)
+            {
+                strcpy(pseudoLue,token);
+                if(strcmp(pseudoLue,pseudo)==0)
+                {
+                    lignePseudo=nb;
+                }
+            }
+            nb++;
         }
     }
+    fclose(f);
+    int nb2=0;
+    FILE *f2=NULL;
+    f2=fopen("joueur.txt","w");
+    if(f2==NULL)
+    {
+        printf("Erreur ouverture fichier");
+    }
+    else
+    {
+        while(nb2<nb)
+        {
+            if(nb!=0)
+            {
+               fprintf(f2,"\n");
+            }
+            if(nb2==lignePseudo)
+            {
+                fprintf(f2,"%s,%d",pseudo,score);
+            }
+            else
+            {
+                fprintf(f2,"%s",buffer[nb2]);
+            }
+            nb2++;
+        }
+    }
+    fclose(f2);
 }

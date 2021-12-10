@@ -67,11 +67,12 @@ int getScore(char *pseudo)
 void setScore(char *pseudo,int score)
 {
     FILE *f=NULL;
-    int nb=1;
+    int nb=0;
     int lignePseudo;
     char ligne[70];
     char pseudoLue[50];
     char *token;
+    char buffer[100][70];
     f=fopen("joueur.txt","r+");
     if(f==NULL)
     {
@@ -82,13 +83,7 @@ void setScore(char *pseudo,int score)
         while(!feof(f))
         {
             fscanf(f,"%s",&ligne);
-            token = strtok(ligne, ",");
-            strcpy(pseudoLue,token);
-            if(strcmp(pseudoLue,pseudo)==0)
-            {
-                token = strtok(NULL, ",");
-                score=atoi(token);
-            }
+            strcpy(buffer[nb],ligne);
         }
     }
 }

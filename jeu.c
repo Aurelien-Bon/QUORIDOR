@@ -248,12 +248,12 @@ void startGame(int load)
                 printf("Le joueur le plus lent a ete: %s",jeu.j4.nom);
                 nextj->score-=2;
             }
-            setScore(jeu->j1.nom,jeu->j1.score);
-            setScore(jeu->j2.nom,jeu->j2.score);
-            if(jeu->nbjoueur==4)
+            setScore(jeu.j1.nom,jeu.j1.score);
+            setScore(jeu.j2.nom,jeu.j2.score);
+            if(jeu.nbjoueur==4)
             {
-                setScore(jeu->j3.nom,jeu->j3.score);
-                setScore(jeu->j4.nom,jeu->j4.score);
+                setScore(jeu.j3.nom,jeu.j3.score);
+                setScore(jeu.j4.nom,jeu.j4.score);
             }
         }
         nextj=nextj->next;

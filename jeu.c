@@ -216,16 +216,39 @@ void startGame(int load)
 
     while(finJeu==0)
     {
+        time_t start = time (NULL);
         if(nextj->crosshaire.cor_x==-1)
         {
             deplacement(nextj,&jeu);
         }
         finJeu=round(nextj,&jeu);
+        nextj->chrono+=(int) (time (NULL) - start);
         if(testFinJeu(nextj)==1)
         {
             printf("Victoire de %s il remporte 5 point",nextj->nom);
             nextj->score+=5;
             finJeu=1;
+            if(jeu.j1.chrono>jeu.j2.chrono&&jeu.j1.chrono>jeu.j3.chrono&&jeu.j1.chrono>jeu.j4.chrono)
+            {
+                printf("Le joueur le plus lent a ete: %s",jeu.j1.nom);
+                nextj->score-=2;
+            }
+            if(jeu.j2.chrono>jeu.j1.chrono&&jeu.j2.chrono>jeu.j3.chrono&&jeu.j2.chrono>jeu.j4.chrono)
+            {
+                printf("Le joueur le plus lent a ete: %s",jeu.j2.nom);
+                nextj->score-=2;
+            }
+            if(jeu.j3.chrono>jeu.j2.chrono&&jeu.j3.chrono>jeu.j1.chrono&&jeu.j3.chrono>jeu.j4.chrono)
+            {
+                printf("Le joueur le plus lent a ete: %s",jeu.j3.nom);
+                nextj->score-=2;
+            }
+            if(jeu.j4.chrono>jeu.j2.chrono && jeu.j4.chrono>jeu.j3.chrono && jeu.j4.chrono>jeu.j1.chrono)
+            {
+                printf("Le joueur le plus lent a ete: %s",jeu.j4.nom);
+                nextj->score-=2;
+            }
+
         }
         nextj=nextj->next;
         //affichage(jeu.terrain);
@@ -327,7 +350,6 @@ int round(struct joueur *j, struct jeu *jeu)
                         jeu->mouve.bariere[i].cord_y1=jeu->bariere[i].cord_y1;
                         jeu->mouve.bariere[i].sens=jeu->bariere[i].sens;
                     }
-                    deplacement(j,jeu);
                     placerBariere(jeu,j);
                     tourjouer=1;
                 }
@@ -688,6 +710,43 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
                         }
                     }
                 }
+            }
+            struct joueur *nextj=jeu->ordrejeu.j;
+            for(int i=0;i<jeu->nbjoueur;i++)
+            {
+                if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
+                {
+                    jeu->bariere[nb].active = 3;
+                }
+                if(jeu->bariere[nb].sens=='h')
+                {
+                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1-1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2-1==nextj->crosshaire.cor_y)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                if(jeu->bariere[nb].sens=='b')
+                {
+                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y-1 || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y-1)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                if(jeu->bariere[nb].sens=='g')
+                {
+                    if(jeu->bariere[nb].cord_x1-1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2-1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                if(jeu->bariere[nb].sens=='d')
+                {
+                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x-1&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x-1&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
+                    {
+                        jeu->bariere[nb].active = 3;
+                    }
+                }
+                nextj=nextj->next;
             }
         }
     }while(placer==0);

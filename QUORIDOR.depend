@@ -1,5 +1,5 @@
 # depslib dependency file v1.0
-1639069632 source:c:\users\aurel\documents\github\quoridor\main.c
+1638983433 source:c:\users\aurel\documents\github\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
@@ -73,7 +73,7 @@
 
 1636928354 c:\users\aurel\documents\github\quoridor\crosshaire.h
 
-1639070150 source:c:\users\aurel\documents\github\quoridor\jeu.c
+1638983318 source:c:\users\aurel\documents\github\quoridor\jeu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -86,43 +86,41 @@
 	"terrain.h"
 	"bariere.h"
 
-1639065736 c:\users\aurel\documents\github\quoridor\joueur.h
+1636928354 c:\users\aurel\documents\github\quoridor\joueur.h
 	"crosshaire.h"
 
-1639069632 source:c:\users\aurel\documents\github\quoridor\joueur.c
+1636969640 source:c:\users\aurel\documents\github\quoridor\joueur.c
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"
 
-1639066617 source:c:\users\anwar\onedrive\desktop\quoridor\main.c
+1638874122 source:c:\users\anwar\onedrive\desktop\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
 	<time.h>
 	<windows.h>
 
-1639066034 c:\users\anwar\onedrive\desktop\quoridor\terrain.h
+1638874122 c:\users\anwar\onedrive\desktop\quoridor\terrain.h
 
-1639066034 source:c:\users\anwar\onedrive\desktop\quoridor\terrain.c
+1638874122 source:c:\users\anwar\onedrive\desktop\quoridor\terrain.c
 	"terrain.h"
 	<stdio.h>
 	<windows.h>
 
-1639066033 source:c:\users\anwar\onedrive\desktop\quoridor\bariere.c
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\bariere.c
 	"bariere.h"
 	<stdio.h>
-	<stdlib.h>
-	<windows.h>
 
-1639066033 c:\users\anwar\onedrive\desktop\quoridor\bariere.h
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\bariere.h
 
-1639066034 source:c:\users\anwar\onedrive\desktop\quoridor\crosshaire.c
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\crosshaire.c
 	"crosshaire.h"
 	<stdlib.h>
 
-1639066034 c:\users\anwar\onedrive\desktop\quoridor\crosshaire.h
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\crosshaire.h
 
-1639066537 source:c:\users\anwar\onedrive\desktop\quoridor\jeu.c
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\jeu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -130,16 +128,65 @@
 	<windows.h>
 	<string.h>
 
-1639066034 c:\users\anwar\onedrive\desktop\quoridor\jeu.h
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\jeu.h
 	"joueur.h"
 	"terrain.h"
 	"bariere.h"
 
-1639066537 c:\users\anwar\onedrive\desktop\quoridor\joueur.h
+1638874121 c:\users\anwar\onedrive\desktop\quoridor\joueur.h
 	"crosshaire.h"
 
-1639066537 source:c:\users\anwar\onedrive\desktop\quoridor\joueur.c
+1638874121 source:c:\users\anwar\onedrive\desktop\quoridor\joueur.c
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"
+
+1638983630 source:c:\users\alexbel\documents\github\quoridor\bariere.c
+	"bariere.h"
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+
+1638983630 c:\users\alexbel\documents\github\quoridor\bariere.h
+
+1638983630 source:c:\users\alexbel\documents\github\quoridor\crosshaire.c
+	"crosshaire.h"
+	<stdlib.h>
+
+1638983630 c:\users\alexbel\documents\github\quoridor\crosshaire.h
+
+1639092831 source:c:\users\alexbel\documents\github\quoridor\jeu.c
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu.h"
+	<windows.h>
+	<string.h>
+
+1639097034 c:\users\alexbel\documents\github\quoridor\jeu.h
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+
+1638983630 c:\users\alexbel\documents\github\quoridor\joueur.h
+	"crosshaire.h"
+
+1638983630 c:\users\alexbel\documents\github\quoridor\terrain.h
+
+1638983630 source:c:\users\alexbel\documents\github\quoridor\joueur.c
+	<stdio.h>
+	<stdlib.h>
+	"joueur.h"
+
+1638983630 source:c:\users\alexbel\documents\github\quoridor\terrain.c
+	"terrain.h"
+	<stdio.h>
+	<windows.h>
+
+1639096734 source:c:\users\alexbel\documents\github\quoridor\main.c
+	<stdio.h>
+	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
 

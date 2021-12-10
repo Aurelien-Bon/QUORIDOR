@@ -36,7 +36,7 @@ typedef struct jeu
 
 struct jeu creeJeu(void);
 struct lastmouve creeLastmouve();
-void newGame(struct jeu *jeu);//nouvelle parti
+void newGame(struct jeu *jeu);//nouvelle partie
 void oldGame(struct jeu *jeu);//chargement d'une ancienne partie
 void startGame(int load);
 int round(struct joueur *j,struct jeu *jeu);

@@ -209,48 +209,24 @@ void startGame(int load)
         newGame(&jeu);
     else
         oldGame(&jeu);
-    //printf("jeu etat: %d, ",jeu.etat);
+    printf("jeu etat: %d, ",jeu.etat);
     //printf("next joueur: %s\n", jeu.ordrejeu.j->nom);
     t_joueur *nextj=jeu.ordrejeu.j;
     int finJeu=0;
 
     while(finJeu==0)
     {
-        time_t start = time (NULL);
         if(nextj->crosshaire.cor_x==-1)
         {
             deplacement(nextj,&jeu);
         }
         finJeu=round(nextj,&jeu);
-        nextj->chrono+=(int) (time (NULL) - start);
         if(testFinJeu(nextj)==1)
         {
             printf("Victoire de %s il remporte 5 point",nextj->nom);
             nextj->score+=5;
             finJeu=1;
-            if(jeu.j1.chrono>jeu.j2.chrono&&jeu.j1.chrono>jeu.j3.chrono&&jeu.j1.chrono>jeu.j4.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j1.nom);
-                nextj->score-=2;
-            }
-            if(jeu.j2.chrono>jeu.j1.chrono&&jeu.j2.chrono>jeu.j3.chrono&&jeu.j2.chrono>jeu.j4.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j2.nom);
-                nextj->score-=2;
-            }
-            if(jeu.j3.chrono>jeu.j2.chrono&&jeu.j3.chrono>jeu.j1.chrono&&jeu.j3.chrono>jeu.j4.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j3.nom);
-                nextj->score-=2;
-            }
-            if(jeu.j4.chrono>jeu.j2.chrono && jeu.j4.chrono>jeu.j3.chrono && jeu.j4.chrono>jeu.j1.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j4.nom);
-                nextj->score-=2;
-            }
-
         }
-
         nextj=nextj->next;
         //affichage(jeu.terrain);
     }
@@ -274,10 +250,10 @@ int round(struct joueur *j, struct jeu *jeu)
             printf("%s",message);
             Color(15,0);
             gotoligcol(20,0);
-            printf("         Deplacer mon pions     \n");
-            printf("         Posser une bariere     \n");
+            printf("         Deplacer mon pion      \n");
+            printf("         Poser une bariere      \n");
             printf("           Ne rien faire        \n");
-            printf("   Annuler le derniere mouvement\n");
+            printf("   Annuler le dernier mouvement \n");
             printf("              Quitter           \n");
             gotoligcol(19+choix,0);
             printf("->");
@@ -351,6 +327,7 @@ int round(struct joueur *j, struct jeu *jeu)
                         jeu->mouve.bariere[i].cord_y1=jeu->bariere[i].cord_y1;
                         jeu->mouve.bariere[i].sens=jeu->bariere[i].sens;
                     }
+                    deplacement(j,jeu);
                     placerBariere(jeu,j);
                     tourjouer=1;
                 }
@@ -464,6 +441,15 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                             {
                                j->crosshaire.cor_x+=1;
                             }
+                                /*
+                                if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'q')==2)
+                                {
+                                   j->crosshaire.cor_x+=2;
+                                }
+                                else
+                                {
+                                   j->crosshaire.cor_x+=1;
+                                }*/
                         }
                     break;
                 case 'z':
@@ -703,43 +689,6 @@ void placerBariere(struct jeu *jeu,struct joueur *j)
                     }
                 }
             }
-            struct joueur *nextj=jeu->ordrejeu.j;
-            for(int i=0;i<jeu->nbjoueur;i++)
-            {
-                if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
-                {
-                    jeu->bariere[nb].active = 3;
-                }
-                if(jeu->bariere[nb].sens=='h')
-                {
-                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1-1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2-1==nextj->crosshaire.cor_y)
-                    {
-                        jeu->bariere[nb].active = 3;
-                    }
-                }
-                if(jeu->bariere[nb].sens=='b')
-                {
-                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y-1 || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y-1)
-                    {
-                        jeu->bariere[nb].active = 3;
-                    }
-                }
-                if(jeu->bariere[nb].sens=='g')
-                {
-                    if(jeu->bariere[nb].cord_x1-1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2-1==nextj->crosshaire.cor_x&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
-                    {
-                        jeu->bariere[nb].active = 3;
-                    }
-                }
-                if(jeu->bariere[nb].sens=='d')
-                {
-                    if(jeu->bariere[nb].cord_x1==nextj->crosshaire.cor_x-1&&jeu->bariere[nb].cord_y1==nextj->crosshaire.cor_y || jeu->bariere[nb].cord_x2==nextj->crosshaire.cor_x-1&&jeu->bariere[nb].cord_y2==nextj->crosshaire.cor_y)
-                    {
-                        jeu->bariere[nb].active = 3;
-                    }
-                }
-                nextj=nextj->next;
-            }
         }
     }while(placer==0);
 }
@@ -953,7 +902,7 @@ void affichage(struct jeu jeu,struct joueur j)
     gotoligcol(12,50);
     printf("Jeton: %c",j.crosshaire.type);
     gotoligcol(16,50);
-    printf("Bariere restante: %d",j.nb_bariere);
+    printf("Barrieres restantes: %d",j.nb_bariere);
     gotoligcol(19,50);
     printf("    [%c]",0x18);
     gotoligcol(20,50);
@@ -961,13 +910,11 @@ void affichage(struct jeu jeu,struct joueur j)
     gotoligcol(21,50);
     printf("  [SPACE]   pour valider");
     gotoligcol(22,50);
-    printf("  [ESCAPE]  pour annuer");
+    printf("  [ESCAPE]  pour annuler");
     gotoligcol(23,50);
-    printf("  [CRTL]  pour rotation anti-horraire");
+    printf("  [CRTL]  pour rotation anti-horaire");
     gotoligcol(24,50);
-    printf("  [ALT]  pour rotation horraire");
-    gotoligcol(10,50);
-    printf("%d sec",j.chrono);
+    printf("  [ALT]  pour rotation horaire");
     gotoligcol(20,0);
 }
 

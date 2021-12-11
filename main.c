@@ -9,6 +9,32 @@ int main()
     menu();
     return 0;
 }
+/*
+void regleJeu()
+{
+    printf("Voici les règles du jeu :\n")
+    printf("")
+}
+*/
+/*
+void scoreJoueur()
+{
+    FILE* fichier = NULL;
+    int score[3] = {0}; // Tableau des 3 meilleurs scores
+
+    fichier = fopen("joueur.txt", "r");
+
+    if (fichier != NULL)
+    {
+        fscanf(fichier, "%d %d %d", &score[0], &score[1], &score[2]);
+        printf("Les meilleurs scores sont : %d, %d et %d", score[0], score[1], score[2]);
+
+        fclose(fichier);
+    }
+
+    return 0;
+}*/
+
 void menu()
 {
     int finpartie = 0;
@@ -35,11 +61,11 @@ void menu()
             Color(15,0);
             printf("                                                                    _________________________________________        \n");
             printf("                                                                   /                                         \\       \n");
-            printf("                                                                  /       1. Lancer une nouvelle partie       \\      \n");
-            printf("                                                                 /     2. Reprendre une partie sauvegardee     \\     \n");
-            printf("                                                                (         3. Afficher les regles du jeu         )     \n");
-            printf("                                                                 \\     4. Afficher les scores des joueurs      /     \n");
-            printf("                                                                  \\           5. Quitter le jeu               /      \n");
+            printf("                                                                  /       1. LANCER UNE NOUVELLE PARTIE       \\      \n");
+            printf("                                                                 /     2. REPRENDRE UNE PARTIE SAUVEGARDEE     \\     \n");
+            printf("                                                                (         3. AFFICHER LES REGLES DU JEU         )     \n");
+            printf("                                                                 \\     4. AFFICHER LES SCORES DES JOUEURS      /     \n");
+            printf("                                                                  \\           5. QUITTER LE JEU               /      \n");
             printf("                                                                   \\_________________________________________/       \n");
             Color(10,0);
             gotoligcol(21+choix,68);
@@ -78,8 +104,8 @@ void menu()
             break;
 
             case 4 :
-
-            break;
+                //scoreJoueur();
+                break;
 
             case 5 :
                 quitter = 1;

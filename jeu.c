@@ -20,26 +20,31 @@ void newGame(struct jeu *jeu)
 {
     jeu->etat=0;
     jeu->mouve=creeLastmouve();
-    int nb=1;
+    int nb=3;
     int quitter=0;
     char c;
     while(quitter==0)
     {
         system("cls");
-        printf("A combien de joueur voulez vous jouer? \n");
-        printf("   2 joueurs\n");
-        printf("   4 joueurs\n");
-        gotoligcol(nb,0);
+        printf("   ______________________________________________\n");
+        printf("  |                                              |\n");
+        printf("  |  A COMBIEN DE JOUEUR SOUHAITEZ-VOUS JOUER ?  |\n");
+        printf("  |                 2 JOUEURS                    |\n");
+        printf("  |                 4 JOUEURS                    |\n");
+        printf("  |______________________________________________|\n");
+        gotoligcol(nb,17);
+        Color(10,0);
         printf("->");
-        gotoligcol(nb,13);
+        gotoligcol(nb,30);
         printf("<-");
+        Color(15,0);
         gotoligcol(0,0);
         c=toucheAppuiez();
-        if(c=='z'&&nb>1)
+        if(c=='z'&&nb>3)
         {
             nb--;
         }
-        if(c=='s'&&nb<2)
+        if(c=='s'&&nb<4)
         {
             nb++;
         }
@@ -49,7 +54,7 @@ void newGame(struct jeu *jeu)
         }
     }
     system("cls");
-    if(nb==1)
+    if(nb==3)
     {
         jeu->j1=creeJoueur();
         jeu->j2=creeJoueur();
@@ -65,7 +70,7 @@ void newGame(struct jeu *jeu)
             jeu->j1.startside='B';
             jeu->j2.startside='H';
         }
-        if(nb==1)
+        if(nb==2)
         {
             jeu->ordrejeu.j=&(jeu->j2);
             jeu->j1.startside='H';
@@ -96,7 +101,7 @@ void newGame(struct jeu *jeu)
             jeu->j3.startside='H';
             jeu->j4.startside='D';
         }
-        if(nb==1)
+        if(nb==3)
         {
             jeu->ordrejeu.j=&(jeu->j2);
             jeu->j1.startside='D';
@@ -104,7 +109,7 @@ void newGame(struct jeu *jeu)
             jeu->j3.startside='G';
             jeu->j4.startside='H';
         }
-        if(nb==2)
+        if(nb==4)
         {
             jeu->ordrejeu.j=&(jeu->j3);
             jeu->j1.startside='H';
@@ -135,7 +140,7 @@ void oldGame(struct jeu *jeu)
     f=fopen("oldGame.txt","r");
     if(f==NULL)
     {
-        printf("Erreur ouverture fichier");
+        printf("ERREUR ouverture fichier");
         return -1;
     }
     else
@@ -279,15 +284,18 @@ int round(struct joueur *j, struct jeu *jeu)
             printf("%s",message);
             Color(15,0);
             gotoligcol(20,0);
-            printf("         Deplacer mon pion      \n");
-            printf("         Poser une bariere      \n");
-            printf("           Ne rien faire        \n");
-            printf("   Annuler le dernier mouvement \n");
-            printf("              Quitter           \n");
+            printf("         DEPLACER MON PION      \n");
+            printf("        POSER UNE BARRIERE      \n");
+            printf("           NE RIEN FAIRE        \n");
+            printf("   ANNULER LE DERNIER MOUVEMENT \n");
+            Color(12,0);
+            printf("              QUITTER           \n");
             gotoligcol(19+choix,0);
+            Color(10,0);
             printf("->");
-            gotoligcol(19+choix,33);
+            gotoligcol(19+choix,32);
             printf("<-");
+            Color(15,0);
             gotoligcol(30,0);
             c=toucheAppuiez();
             if(c=='z'&&choix>1)
@@ -959,30 +967,33 @@ void affichage(struct jeu jeu,struct joueur j)
     afficherBariere(jeu);
     affichageJoueur(jeu);
     gotoligcol(0,50);
-    printf("Nombre de joueur: %d",jeu.nbjoueur);
+    printf("NOMBRE DE JOUEURS : %d",jeu.nbjoueur);
     gotoligcol(4,50);
-    printf("Joueur: %s",j.nom);
+    printf("JOUEUR : %s",j.nom);
     gotoligcol(8,50);
-    printf("Score Partie: %d",j.score);
+    printf("SCORE PARTIE : %d",j.score);
     gotoligcol(12,50);
-    printf("Jeton: %c",j.crosshaire.type);
+    printf("JETON : %c",j.crosshaire.type);
     gotoligcol(16,50);
-    printf("Barrieres restantes: %d",j.nb_bariere);
+    printf("BARRIERES RESTANTES : %d",j.nb_bariere);
     gotoligcol(19,50);
     printf("    [%c]",0x18);
     gotoligcol(20,50);
-    printf("[<-][%c][->] pour se deplacer",0x19);
+    printf("[<-][%c][->]  Pour se deplacer",0x19);
     gotoligcol(21,50);
-    printf("  [SPACE]   pour valider");
+    Color(10,0);
+    printf("  [SPACE]    Pour valider");
     gotoligcol(22,50);
-    printf("  [ESCAPE]  pour annuler");
+    Color(12,0);
+    printf("  [ESCAPE]   Pour annuler");
     gotoligcol(23,50);
-    printf("  [CRTL]  pour rotation anti-horaire");
+    Color(15,0);
+    printf("  [CRTL]     Pour rotation anti-horaire");
     gotoligcol(24,50);
-    printf("  [ALT]  pour rotation horaire");
+    printf("  [ALT]      Pour rotation horaire");
     gotoligcol(20,0);
     gotoligcol(10,50);
-    printf("%d sec",j.chrono);
+    printf("DUREE : %d sec",j.chrono);
 }
 
 int toucheAppuiez()

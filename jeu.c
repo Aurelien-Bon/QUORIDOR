@@ -54,7 +54,7 @@ void newGame(struct jeu *jeu)
         }
     }
     system("cls");
-    if(nb==3)
+    if(nb==1)
     {
         jeu->j1=creeJoueur();
         jeu->j2=creeJoueur();
@@ -70,7 +70,7 @@ void newGame(struct jeu *jeu)
             jeu->j1.startside='B';
             jeu->j2.startside='H';
         }
-        if(nb==2)
+        if(nb==1)
         {
             jeu->ordrejeu.j=&(jeu->j2);
             jeu->j1.startside='H';
@@ -101,7 +101,7 @@ void newGame(struct jeu *jeu)
             jeu->j3.startside='H';
             jeu->j4.startside='D';
         }
-        if(nb==3)
+        if(nb==1)
         {
             jeu->ordrejeu.j=&(jeu->j2);
             jeu->j1.startside='D';
@@ -109,7 +109,7 @@ void newGame(struct jeu *jeu)
             jeu->j3.startside='G';
             jeu->j4.startside='H';
         }
-        if(nb==4)
+        if(nb==2)
         {
             jeu->ordrejeu.j=&(jeu->j3);
             jeu->j1.startside='H';
@@ -146,10 +146,9 @@ void oldGame(struct jeu *jeu)
     else
     {
         int test;
+        char chaine[70];
         fscanf(f,"%d",&test);
         jeu->nbjoueur=test;
-        //printf("%d\n",test);
-        char chaine[70];
         char *d=',';
         if(jeu->nbjoueur==2)
         {
@@ -162,13 +161,14 @@ void oldGame(struct jeu *jeu)
             jeu->ordrejeu.j=&jeu->j1;
             jeu->j1.next=&jeu->j2;
             jeu->j2.next=&jeu->j3;
-            jeu->j1.next=&jeu->j4;
-            jeu->j2.next=&jeu->j1;
+            jeu->j3.next=&jeu->j4;
+            jeu->j4.next=&jeu->j1;
         }
         struct joueur *nextj=jeu->ordrejeu.j;
         for(int i=0;i<jeu->nbjoueur;i++)
         {
             fscanf(f,"%s",&chaine);
+            printf("%s\n",chaine);
             char *p = strtok(chaine, ",");
             strcpy(nextj->nom,p);
             p=strtok(NULL, ",");
@@ -183,9 +183,9 @@ void oldGame(struct jeu *jeu)
             nextj->nb_bariere=atoi(p);
             p= strtok(NULL, ",");
             nextj->startside=p;
-            p= strtok(NULL, ",");
-            nextj->chrono=atoi(p);
             nextj=nextj->next;
+            //p= strtok(NULL, ",");
+            //nextj->chrono=atoi(p);
         }
         for(int i=0;i<20;i++)
         {
@@ -880,7 +880,7 @@ int enregistrement(struct jeu jeu)
         struct joueur *nextj=jeu.ordrejeu.j;
         for(int i=0;i<jeu.nbjoueur;i++)
         {
-            fprintf(f,"%s,%d,%c,%d,%d,%d,%c,%d\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->startside,nextj->chrono);
+            fprintf(f,"%s,%d,%c,%d,%d,%d,%c\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->startside);
             nextj=nextj->next;
         }
         for(int i=0;i<20;i++)
@@ -969,11 +969,7 @@ void affichage(struct jeu jeu,struct joueur j)
     afficherBariere(jeu);
     affichageJoueur(jeu);
     gotoligcol(0,50);
-<<<<<<< Updated upstream
     printf("NOMBRE DE JOUEURS : %d",jeu.nbjoueur);
-=======
-    printf("Nombre de joueur: %d %c",jeu.nbjoueur,j.startside);
->>>>>>> Stashed changes
     gotoligcol(4,50);
     printf("JOUEUR : %s",j.nom);
     gotoligcol(8,50);

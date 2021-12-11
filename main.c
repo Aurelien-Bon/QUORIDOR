@@ -12,7 +12,7 @@ int main()
 /*
 void regleJeu()
 {
-    printf("Voici les règles du jeu :\n")
+    printf("Voici les règles du jeu :\n");
     printf("")
 }
 */

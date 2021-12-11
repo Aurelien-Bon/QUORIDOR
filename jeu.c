@@ -20,7 +20,7 @@ void newGame(struct jeu *jeu)
 {
     jeu->etat=0;
     jeu->mouve=creeLastmouve();
-    int nb=3;
+    int nb=1;
     int quitter=0;
     char c;
     while(quitter==0)
@@ -32,19 +32,19 @@ void newGame(struct jeu *jeu)
         printf("  |                 2 JOUEURS                    |\n");
         printf("  |                 4 JOUEURS                    |\n");
         printf("  |______________________________________________|\n");
-        gotoligcol(nb,17);
+        gotoligcol(nb+2,17);
         Color(10,0);
         printf("->");
-        gotoligcol(nb,30);
+        gotoligcol(nb+2,30);
         printf("<-");
         Color(15,0);
         gotoligcol(0,0);
         c=toucheAppuiez();
-        if(c=='z'&&nb>3)
+        if(c=='z'&&nb>1)
         {
             nb--;
         }
-        if(c=='s'&&nb<4)
+        if(c=='s'&&nb<2)
         {
             nb++;
         }

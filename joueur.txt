@@ -1,0 +1,17 @@
+<<<<<<< Updated upstream
+=======
+
+Wanders,1
+wanders,6
+mao,13
+alex,0
+aurel,0
+ado,0
+SDAS,0
+dS,0
+JeanMich,0
+FZDs,0
+DMZS,0
+VAd,0
+DAS,0
+>>>>>>> Stashed changes

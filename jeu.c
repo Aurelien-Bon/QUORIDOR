@@ -182,7 +182,9 @@ void oldGame(struct jeu *jeu)
             p= strtok(NULL, ",");
             nextj->nb_bariere=atoi(p);
             p= strtok(NULL, ",");
-            nextj->startside=atoi(p);
+            nextj->startside=p;
+            p= strtok(NULL, ",");
+            nextj->chrono=atoi(p);
             nextj=nextj->next;
         }
         for(int i=0;i<20;i++)
@@ -878,7 +880,7 @@ int enregistrement(struct jeu jeu)
         struct joueur *nextj=jeu.ordrejeu.j;
         for(int i=0;i<jeu.nbjoueur;i++)
         {
-            fprintf(f,"%s,%d,%c,%d,%d,%d,%c\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->startside);
+            fprintf(f,"%s,%d,%c,%d,%d,%d,%c,%d\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->startside,nextj->chrono);
             nextj=nextj->next;
         }
         for(int i=0;i<20;i++)
@@ -967,7 +969,11 @@ void affichage(struct jeu jeu,struct joueur j)
     afficherBariere(jeu);
     affichageJoueur(jeu);
     gotoligcol(0,50);
+<<<<<<< Updated upstream
     printf("NOMBRE DE JOUEURS : %d",jeu.nbjoueur);
+=======
+    printf("Nombre de joueur: %d %c",jeu.nbjoueur,j.startside);
+>>>>>>> Stashed changes
     gotoligcol(4,50);
     printf("JOUEUR : %s",j.nom);
     gotoligcol(8,50);

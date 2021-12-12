@@ -11,11 +11,23 @@ void gotoligcol( int lig, int col )
     mycoord.Y = lig;
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
-
+struct CaseBonus CaseRand()
+{
+    t_CaseBonus N={0};
+    N.x=1+rand()%7;
+    N.y=1+rand()%7;
+    N.valeur=rand()%5;
+    N.active=1;
+    return N;
+}
 
 struct terrain creeTerrain()
 {
     t_terrain grille={0x00};
+    for(int i=0;i<7;i++)
+    {
+        grille.casebonus[i]=CaseRand();
+    }
     grille.grille[2][0]='1';
     grille.grille[4][0]='2';
     grille.grille[6][0]='3';
@@ -98,6 +110,35 @@ void affichageTerrain( struct terrain terrain)
         {
             gotoligcol(i,j);
             printf("%c",terrain.grille[i][j]);
+        }
+    }
+}
+int checkCase(int x,int y,struct terrain t)
+{
+    int val=0;
+    for(int i=0;i<7;i++)
+    {
+        if(t.casebonus[i].x==x&&t.casebonus[i].active==1)
+        {
+            if(t.casebonus[i].y==y)
+            {
+                val=t.casebonus[i].valeur;
+                t.casebonus[i].active=0;
+            }
+        }
+    }
+    return val;
+}
+void afficherCase(struct terrain terrain)
+{
+    for(int i=0;i<7;i++)
+    {
+        if(terrain.casebonus[i].active==1)
+        {
+            gotoligcol(terrain.casebonus[i].x*2+2,terrain.casebonus[i].y*4+6);
+            Color(8,0);
+            printf("%d",terrain.casebonus[i].valeur);
+            Color(15,0);
         }
     }
 }

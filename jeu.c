@@ -7,7 +7,7 @@
 
 struct jeu creeJeu(void)
 {
-    t_jeu jeu={0};
+    t_jeu jeu={NULL};
     return jeu;
 }
 struct lastmouve creeLastmouve()
@@ -267,6 +267,10 @@ void oldGame(struct jeu *jeu)
             jeu->j3.startside='H';
             jeu->j4.startside='D';
         }
+        else
+        {
+            return -1;
+        }
         struct joueur *nextj=jeu->ordrejeu.j;
         for(int i=0;i<jeu->nbjoueur;i++)
         {
@@ -335,13 +339,15 @@ void startGame(int load)
         {
             deplacement(nextj,&jeu);
         }
-        else
+        else if(jeu.etat==1)
         {
             finJeu=round(nextj,&jeu);
         }
         nextj->chrono+=(int) (time (NULL) - start);
-        if(testFinJeu(nextj)==1)
+        if(testFinJeu(nextj)==1||jeu.etat==2)
         {
+            jeu.etat=2;
+            enregistrement(jeu);
             setScore(jeu.j1.nom,jeu.j1.score);
             setScore(jeu.j2.nom,jeu.j2.score);
             if(jeu.nbjoueur==4)
@@ -688,7 +694,17 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                         {
                             if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x-1,j->crosshaire.cor_y,'g')==0)
                             {
-                               j->crosshaire.cor_x-=1;
+                                if(joueurPresent(*jeu,*j,j->crosshaire.cor_x-1,j->crosshaire.cor_y)==1)
+                                {
+                                    if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x-2,j->crosshaire.cor_y,'g')==0)
+                                    {
+                                        j->crosshaire.cor_x-=2;
+                                    }
+                                }
+                                else
+                                {
+                                   j->crosshaire.cor_x-=1;
+                                }
                             }
                         }
                     }
@@ -699,17 +715,37 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                         {
                             if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'d')==0)
                             {
-                               j->crosshaire.cor_x+=1;
+                                if(joueurPresent(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y)==1)
+                                {
+                                    if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+2,j->crosshaire.cor_y,'d')==0)
+                                    {
+                                        j->crosshaire.cor_x+=2;
+                                    }
+                                }
+                                else
+                                {
+                                   j->crosshaire.cor_x+=1;
+                                }
                             }
                         }
                     break;
                 case 'z':
-                    if(j->crosshaire.cor_y-1>=0)//on sort par le haut
+                    if(j->crosshaire.cor_y-1>=0)//on sort par le haut//h y-1
                         if(j->crosshaire.cor_y-1>y-2&&j->crosshaire.cor_x==x)
                         {
                             if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y-1,'h')==0)
                             {
-                               j->crosshaire.cor_y-=1;
+                                if(joueurPresent(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y-1)==1)
+                                {
+                                    if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y-2,'h')==0)
+                                    {
+                                        j->crosshaire.cor_y-=2;
+                                    }
+                                }
+                                else
+                                {
+                                   j->crosshaire.cor_y-=1;
+                                }
                             }
                         }
                     break;
@@ -719,7 +755,17 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                         {
                             if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y+1,'b')==0)
                             {
-                               j->crosshaire.cor_y+=1;
+                                if(joueurPresent(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y+1)==1)
+                                {
+                                    if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y+2,'b')==0)
+                                    {
+                                        j->crosshaire.cor_y+=2;
+                                    }
+                                }
+                                else
+                                {
+                                   j->crosshaire.cor_y+=1;
+                                }
                             }
                         }
                     break;
@@ -730,6 +776,7 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                     break;
                 case ' ':
                     quitter=1;
+                    j->score+=checkCase(j->crosshaire.cor_x,j->crosshaire.cor_y,jeu->terrain);
                     break;
             }
         }while(quitter==0);
@@ -747,94 +794,97 @@ int deplacementPossible(struct jeu jeu, struct joueur j, int x, int y,char sens)
 
             if(sens=='h')
             {
-                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1-1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2-1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y-1)
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y-1)
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y)
                 {
                     pos=1;
                 }
             }
             if(sens=='b')
             {
-                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y-1)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y-1)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1-1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2-1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y)
                 {
                     pos=1;
                 }
             }
             if(sens=='d')
             {
-                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x1==x-1&&jeu.bariere[i].cord_y1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x2==x-1&&jeu.bariere[i].cord_y2==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x1-1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x2-1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y)
                 {
                     pos=1;
                 }
             }
             if(sens=='g')
             {
-                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x1-1==x&&jeu.bariere[i].cord_y1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x2-1==x&&jeu.bariere[i].cord_y2==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x-1&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y)
                 {
                     pos=1;
                 }
-                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x-1&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y)
                 {
                     pos=1;
                 }
             }
         }
     }
+    return pos;
+}
+int joueurPresent(struct jeu jeu, struct joueur j, int x, int y)
+{
+    int pos;
     struct joueur *nextj=jeu.ordrejeu.j;
     for(int i=0;i<jeu.nbjoueur;i++)
     {
         if(strcmp(nextj->nom,j.nom)!=0)
         {
-            //printf("%s:%d,%d,%d,%d\n",nextj->nom,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,x,y);
-            if(nextj->crosshaire.cor_x==x&&nextj->crosshaire.cor_x==y)
+            if(nextj->crosshaire.cor_x==x&&nextj->crosshaire.cor_y==y)
             {
                 pos=1;
             }
         }
-
         nextj=nextj->next;
     }
     return pos;
@@ -1246,6 +1296,7 @@ void affichage(struct jeu jeu,struct joueur j)
 {
     system("cls");
     affichageTerrain(jeu.terrain);
+    afficherCase(jeu.terrain);
     afficherBariere(jeu);
     affichageJoueur(jeu);
     gotoligcol(0,50);

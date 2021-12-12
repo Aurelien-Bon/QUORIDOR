@@ -42,6 +42,7 @@ void startGame(int load);
 int round(struct joueur *j,struct jeu *jeu);
 void deplacement(struct joueur *j, struct jeu *jeu);
 int deplacementPossible(struct jeu jeu, struct joueur j, int x, int y,char sens);
+int joueurPresent(struct jeu jeu, struct joueur j, int x, int y);
 void placerBariere(struct jeu *jeu,struct joueur *j);
 void deplacementBariere(struct jeu *j,int nb,int x,int y,int direction);
 int testFinJeu(struct joueur *j);

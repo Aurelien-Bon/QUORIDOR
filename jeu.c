@@ -361,13 +361,6 @@ void startGame(int load)//methode pour le demarage de partie
         {
             jeu.etat=2;
             enregistrement(jeu);//on enregistre le jeu
-            setScore(jeu.j1.nom,jeu.j1.score);//on ajoute le nouveau score des joueur
-            setScore(jeu.j2.nom,jeu.j2.score);
-            if(jeu.nbjoueur==4)
-            {
-                setScore(jeu.j3.nom,jeu.j3.score);
-                setScore(jeu.j4.nom,jeu.j4.score);
-            }
             int quitter=0;
             system("cls");//on affiche l'ecran de fin de partie
             gotoligcol(0,0);
@@ -389,26 +382,50 @@ void startGame(int load)//methode pour le demarage de partie
                 Color(15,0);
                 nextj->score+=5;
                 finJeu=1;
-                if(jeu.j1.chrono>jeu.j2.chrono&&jeu.j1.chrono>jeu.j3.chrono&&jeu.j1.chrono>jeu.j4.chrono)//on affiche le joueur avec le plus long timer
+                if(jeu.nbjoueur==2)
                 {
-                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j1.nom,jeu.j1.chrono);
-                    nextj->score-=2;
+                    if(jeu.j1.chrono<=jeu.j2.chrono)//on affiche le joueur avec le plus cours timer
+                    {
+                        printf("  Joueur le plus rapide : %s avec ",jeu.j1.nom,jeu.j1.chrono);
+                        afficherHeur(jeu.j1.chrono);
+                        jeu.j1.score+=2;
+                    }
+                    if(jeu.j2.chrono<=jeu.j1.chrono)
+                    {
+                        printf("  Joueur le plus rapide : %s avec ",jeu.j2.nom,jeu.j2.chrono);
+                        afficherHeur(jeu.j2.chrono);
+                        jeu.j2.score+=2;
+                    }
                 }
-                if(jeu.j2.chrono>jeu.j1.chrono&&jeu.j2.chrono>jeu.j3.chrono&&jeu.j2.chrono>jeu.j4.chrono)
+                if(jeu.nbjoueur==4)
                 {
-                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j2.nom,jeu.j2.chrono);
-                    nextj->score-=2;
+                    if(jeu.j1.chrono<jeu.j2.chrono&&jeu.j1.chrono<jeu.j3.chrono&&jeu.j1.chrono<jeu.j4.chrono)//on affiche le joueur avec le plus cours timer
+                    {
+                        printf("  Joueur le plus rapide : %s avec ",jeu.j1.nom,jeu.j1.chrono);
+                        afficherHeur(jeu.j1.chrono);
+                        jeu.j1.score+=2;
+                    }
+                    if(jeu.j2.chrono<jeu.j1.chrono&&jeu.j2.chrono<jeu.j3.chrono&&jeu.j2.chrono<jeu.j4.chrono)
+                    {
+                        printf("  Joueur le plus rapide : %s avec",jeu.j2.nom,jeu.j2.chrono);
+                        afficherHeur(jeu.j2.chrono);
+                        jeu.j2.score+=2;
+                    }
+                    if(jeu.j3.chrono<jeu.j2.chrono&&jeu.j3.chrono<jeu.j1.chrono&&jeu.j3.chrono<jeu.j4.chrono)
+                    {
+                        printf("  Joueur le plus rapide : %s avec ",jeu.j3.nom,jeu.j3.chrono);
+                        afficherHeur(jeu.j3.chrono);
+                        jeu.j3.score+=2;
+                    }
+                    if(jeu.j4.chrono<jeu.j2.chrono && jeu.j4.chrono<jeu.j3.chrono && jeu.j4.chrono<jeu.j1.chrono)
+                    {
+                        printf("  Joueur le plus rapide : %s avec ",jeu.j4.nom,jeu.j4.chrono);
+                        afficherHeur(jeu.j4.chrono);
+                        jeu.j4.score+=2;
+                    }
                 }
-                if(jeu.j3.chrono>jeu.j2.chrono&&jeu.j3.chrono>jeu.j1.chrono&&jeu.j3.chrono>jeu.j4.chrono)
-                {
-                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j3.nom,jeu.j3.chrono);
-                    nextj->score-=2;
-                }
-                if(jeu.j4.chrono>jeu.j2.chrono && jeu.j4.chrono>jeu.j3.chrono && jeu.j4.chrono>jeu.j1.chrono)
-                {
-                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j4.nom,jeu.j4.chrono);
-                    nextj->score-=2;
-                }
+
+                printf("  Il gagne 2 point!\n");
                 Color(12,0);
                 printf("\n");
                 printf(" APPUYER SUR LA TOUCHE ESPACE POUR QUITTER\n");//on attend que le joueur appuie sur espace pour revenir au menu
@@ -417,6 +434,13 @@ void startGame(int load)//methode pour le demarage de partie
                 {
                     quitter=1;
                 }
+            }
+            setScore(jeu.j1.nom,jeu.j1.score);//on ajoute le nouveau score des joueur
+            setScore(jeu.j2.nom,jeu.j2.score);
+            if(jeu.nbjoueur==4)
+            {
+                setScore(jeu.j3.nom,jeu.j3.score);
+                setScore(jeu.j4.nom,jeu.j4.score);
             }
         }
         nextj=nextj->next;//on passe au joueur suivant
@@ -1353,9 +1377,10 @@ void affichage(struct jeu jeu,struct joueur j)//methode d'affichage du plateau d
     printf("  [CRTL]     Pour rotation anti-horaire");
     gotoligcol(24,50);
     printf("  [ALT]      Pour rotation horaire");
-    gotoligcol(20,0);
     gotoligcol(10,50);
-    printf("DUREE : %d sec",j.chrono);
+    printf("DUREE : ");
+    afficherHeur(j.chrono);
+    gotoligcol(20,0);
 }
 
 int toucheAppuiez()//methode pour recupere les touche appuiez
@@ -1410,4 +1435,48 @@ int toucheAppuiez()//methode pour recupere les touche appuiez
         }
     }
     return cara;
+}
+void afficherHeur(int seconde)//methode pour afficher l'heure
+{
+    int ok=0;
+    int min=0;
+    int heure=0;
+    while(ok==0)
+    {
+        if(min>=60)
+        {
+            heure+=1;
+            min-=60;
+        }
+        if(seconde>=60)
+        {
+            min+=1;
+            seconde-=60;
+        }
+        else
+        {
+            ok=1;
+        }
+    }
+    if(heure!=0)
+    {
+        if(heure<10)
+        {
+            printf("0");
+        }
+        printf("%dh ",heure);
+    }
+    if(min!=0||heure!=0)
+    {
+        if(min<10)
+        {
+            printf("0");
+        }
+        printf("%dmin ",min);
+    }
+    if(seconde<10)
+    {
+        printf("0");
+    }
+    printf("%dsec\n",seconde);
 }

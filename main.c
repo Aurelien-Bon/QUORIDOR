@@ -6,15 +6,15 @@
 int main()
 {
     srand(time(NULL));
-    menu();
+    menu();//appelle methode menue
     return 0;
 }
 
-void regleJeu()
+void regleJeu()//methode d'affichage des regle de jeu
 {
     int quitter = 0;
     char c;
-    while (quitter == 0)
+    while (quitter == 0)//s'affiche jusqu'a ce que l'utilisateur appuie sur espace
     {
         printf("   ______________________________________________________________________         \n");
         printf("  |                                                                      |        \n");
@@ -62,7 +62,7 @@ void regleJeu()
 }
 
 
-void scoreJoueur()
+void scoreJoueur()//methode d'affichage des 10 meilleur joueur
 {
     FILE* fichier = NULL;
     int score[100];
@@ -71,7 +71,7 @@ void scoreJoueur()
     char *token;
     int quitter=0;
     int nb=0;
-    fichier = fopen("joueur.txt", "r");
+    fichier = fopen("joueur.txt", "r");//lecture du fichier
     if (fichier != NULL)
     {
         while(!feof(fichier))
@@ -79,7 +79,7 @@ void scoreJoueur()
 
             fscanf(fichier, "%s",ligne);
             token = strtok(ligne, ",");
-            strcpy(pseudoLue[nb],token);
+            strcpy(pseudoLue[nb],token);//on enregistre le pseudo et le score
             token = strtok(NULL,",");
             score[nb]=atoi(token);
             nb++;
@@ -89,7 +89,7 @@ void scoreJoueur()
     int tri=0;
     int scorec;
     char pseudoc[50];
-    while(tri==0)
+    while(tri==0)//on fait un trie par rapport au score
     {
         tri=1;
         for(int i=0;i<nb-1;i++)
@@ -106,7 +106,7 @@ void scoreJoueur()
             }
         }
     }
-    while(quitter==0)
+    while(quitter==0)//on affiche les 10 premier
     {
         Color(11,0);
         printf("   ____________________________________         \n");
@@ -141,7 +141,7 @@ void scoreJoueur()
     }
 }
 
-void menu()
+void menu()//methode menue
 {
     int finpartie = 0;
     while(finpartie == 0)
@@ -149,7 +149,7 @@ void menu()
         int choix=1;
         int quitter=0;
         char c;
-        while(quitter==0)
+        while(quitter==0)//on affiche jusqu'a ce que l'utilisateur ai fait son choix
         {
             system("cls");
             Color(11,0);
@@ -197,23 +197,23 @@ void menu()
         system("cls");
         switch(choix)
         {
-            case 1 :
+            case 1 ://choix de cree une nouvelle partie
                 startGame(0);
                 break;
 
-            case 2 :
+            case 2 ://choix de lancer une ancienne partie
                 startGame(1);
                 break;
 
-            case 3 :
+            case 3 ://choix de lire les regle du jeu
                 regleJeu();
                 break;
 
-            case 4 :
+            case 4 ://choix d'afficher le score des meilleur joueur
                 scoreJoueur();
                 break;
 
-            case 5 :
+            case 5 ://choix de quitter
                 quitter = 1;
                 finpartie = 1;
                 system("cls");

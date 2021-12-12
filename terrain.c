@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <windows.h>
 
-void gotoligcol( int lig, int col )
+void gotoligcol( int lig, int col )//fonction goto donner par l'ecole
 {
     // ressources
     COORD mycoord;
@@ -11,24 +11,24 @@ void gotoligcol( int lig, int col )
     mycoord.Y = lig;
     SetConsoleCursorPosition( GetStdHandle( STD_OUTPUT_HANDLE ), mycoord );
 }
-struct CaseBonus CaseRand()
+struct CaseBonus CaseRand()//methode pour cree les case bonnus
 {
     t_CaseBonus N={0};
-    N.x=1+rand()%7;
-    N.y=1+rand()%7;
-    N.valeur=1+rand()%3;
+    N.x=1+rand()%7;//randomme pour la coordoner x
+    N.y=1+rand()%7;//randomme pour la coordoner y
+    N.valeur=1+rand()%3;//randomme pour la valeur
     N.active=1;
     return N;
 }
 
-struct terrain creeTerrain()
+struct terrain creeTerrain()//methode pour cree le terrain
 {
     t_terrain grille={0x00};
-    for(int i=0;i<7;i++)
+    for(int i=0;i<7;i++)//creation des case bonnus
     {
         grille.casebonus[i]=CaseRand();
     }
-    grille.grille[2][0]='1';
+    grille.grille[2][0]='1';//on place les bon caractere ascii au bon endoit dans la matrice
     grille.grille[4][0]='2';
     grille.grille[6][0]='3';
     grille.grille[8][0]='4';
@@ -102,38 +102,38 @@ struct terrain creeTerrain()
     }
     return grille;
 }
-void affichageTerrain( struct terrain terrain)
+void affichageTerrain( struct terrain terrain)//methode pour afficher le terrain
 {
     for(int i=0;i<20;i++)
     {
         for(int j=0;j<40;j++)
         {
-            gotoligcol(i,j);
+            gotoligcol(i,j);//affiche au bonne coordonner sur la console
             printf("%c",terrain.grille[i][j]);
         }
     }
 }
-int checkCase(int x,int y,struct terrain *t)
+int checkCase(int x,int y,struct terrain *t)//methode pour verifier si le joueur est sur une case bonnus
 {
     int val=0;
     for(int i=0;i<7;i++)
     {
-        if(t->casebonus[i].x==x&&t->casebonus[i].active==1)
+        if(t->casebonus[i].x==x&&t->casebonus[i].active==1)//si la case est active et que les coordonner x et y sont les meme
         {
             if(t->casebonus[i].y==y)
             {
-                val=t->casebonus[i].valeur;
-                t->casebonus[i].active=0;
+                val=t->casebonus[i].valeur;//retourne la valeur
+                t->casebonus[i].active=0;//desactive la case
             }
         }
     }
     return val;
 }
-void afficherCase(struct terrain terrain)
+void afficherCase(struct terrain terrain)//methode pour afficher les case bonus
 {
     for(int i=0;i<7;i++)
     {
-        if(terrain.casebonus[i].active==1)
+        if(terrain.casebonus[i].active==1)//si la case est acctive alors on l'affiche
         {
             gotoligcol(terrain.casebonus[i].y*2+2,terrain.casebonus[i].x*4+6);
             Color(8,0);

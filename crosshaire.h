@@ -6,11 +6,7 @@ typedef struct crosshaire
     int cor_x;//colonne
     int cor_y;//ligne
 }t_crosshaire;
-char choixType(void);
-struct crosshaire creeCrossaire(void);
-int getX(struct crosshaire c);
-int getY(struct crosshaire c);
-char getType(struct crosshaire c);
-
+char choixType(void);//methode de selection de pion
+struct crosshaire creeCrossaire(void);//methode de creation de pion
 #endif // JOUEUR_H_INCLUDED
 

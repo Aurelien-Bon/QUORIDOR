@@ -2,7 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <windows.h>
-struct bariere creeBariere(void)
+struct bariere creeBariere(void)//methode de creation des bariere
 {
     t_bariere c={0};
     c.active=0;
@@ -14,11 +14,7 @@ struct bariere creeBariere(void)
     c.sens='h';
     return c;
 }
-void afficherBariereText(struct bariere b)
-{
-    printf("Barriere n°%d, active:%d, au coordonner x1=%d, y1=%d, et x2=%d, y2=%d de sens: %c\n",b.id,b.active,b.cord_x1,b.cord_y1,b.cord_x2,b.cord_y2,b.sens);
-}
-void Color(int couleurDuTexte,int couleurDeFond) // fonction d'affichage de couleurs
+void Color(int couleurDuTexte,int couleurDeFond) //methode chagement de couleur de console donner par l'ecole
 {
     HANDLE H=GetStdHandle(STD_OUTPUT_HANDLE);
     SetConsoleTextAttribute(H,couleurDeFond*16+couleurDuTexte);

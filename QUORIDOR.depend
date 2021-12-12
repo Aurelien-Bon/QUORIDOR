@@ -1,12 +1,20 @@
 # depslib dependency file v1.0
+<<<<<<< Updated upstream
 1639351833 source:c:\users\aurel\documents\github\quoridor\main.c
+=======
+1639347581 source:c:\users\aurel\documents\github\quoridor\main.c
+>>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
 	<time.h>
 	<windows.h>
 
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\terrain.h
+=======
+1639349472 c:\users\aurel\documents\github\quoridor\terrain.h
+>>>>>>> Stashed changes
 
 1639349885 source:c:\users\aurel\documents\github\quoridor\terrain.c
 	"terrain.h"
@@ -59,12 +67,17 @@
 	<stdio.h>
 	<windows.h>
 
+<<<<<<< Updated upstream
 1639349885 source:c:\users\aurel\documents\github\quoridor\bariere.c
+=======
+1639348382 source:c:\users\aurel\documents\github\quoridor\bariere.c
+>>>>>>> Stashed changes
 	"bariere.h"
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\bariere.h
 
 1639349885 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
@@ -74,6 +87,17 @@
 1639349885 c:\users\aurel\documents\github\quoridor\crosshaire.h
 
 1639351474 source:c:\users\aurel\documents\github\quoridor\jeu.c
+=======
+1639348370 c:\users\aurel\documents\github\quoridor\bariere.h
+
+1639348590 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
+	"crosshaire.h"
+	<stdlib.h>
+
+1639348592 c:\users\aurel\documents\github\quoridor\crosshaire.h
+
+1639347593 source:c:\users\aurel\documents\github\quoridor\jeu.c
+>>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -81,12 +105,20 @@
 	<windows.h>
 	<string.h>
 
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\jeu.h
+=======
+1639348234 c:\users\aurel\documents\github\quoridor\jeu.h
+>>>>>>> Stashed changes
 	"joueur.h"
 	"terrain.h"
 	"bariere.h"
 
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\joueur.h
+=======
+1639348796 c:\users\aurel\documents\github\quoridor\joueur.h
+>>>>>>> Stashed changes
 	"crosshaire.h"
 
 1639349885 source:c:\users\aurel\documents\github\quoridor\joueur.c

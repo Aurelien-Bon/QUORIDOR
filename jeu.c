@@ -63,7 +63,9 @@ void newGame(struct jeu *jeu)//methode pour cree une nouvelle partie
             jeu->j2=creeJoueur();//creation j2
             if(strcmp(jeu->j2.nom,jeu->j1.nom)==0)//verifiaction si le pseudo est pas le meme
             {
-                printf("Erreur joueur deja conecter\n");
+                Color(12,0);
+                printf("Erreur joueur deja connecter\n");
+                Color(15,0);
             }
             else
             {
@@ -367,34 +369,49 @@ void startGame(int load)//methode pour le demarage de partie
                 setScore(jeu.j4.nom,jeu.j4.score);
             }
             int quitter=0;
-            system("cls");//on affiche l'ecan de fin de partie
+            system("cls");//on affiche l'ecran de fin de partie
             gotoligcol(0,0);
             while(quitter==0)
             {
-                printf("Victoire de %s il remporte 5 point\n",nextj->nom);
+                Color(11,0);
+                printf("   _____________________________________         \n");
+                printf("  |                                     |        \n");
+                printf("  |            +-+-+-+-+-+-+            |        \n");
+                printf("  | <<<<<   |G|A|M|E| |O|V|E|R|   >>>>> |        \n");
+                printf("  |            +-+-+-+-+-+-+            |        \n");
+                printf("  |_____________________________________|        \n");
+                Color(9,0);
+                printf("   -------------------------------------\n");
+                Color(15,0);
+                printf("   WINNER : %s Tu remportes 5 POINTS !\n",nextj->nom);
+                Color(11,0);
+                printf("   -------------------------------------\n");
+                Color(15,0);
                 nextj->score+=5;
                 finJeu=1;
                 if(jeu.j1.chrono>jeu.j2.chrono&&jeu.j1.chrono>jeu.j3.chrono&&jeu.j1.chrono>jeu.j4.chrono)//on affiche le joueur avec le plus long timer
                 {
-                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j1.nom,jeu.j1.chrono);
+                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j1.nom,jeu.j1.chrono);
                     nextj->score-=2;
                 }
                 if(jeu.j2.chrono>jeu.j1.chrono&&jeu.j2.chrono>jeu.j3.chrono&&jeu.j2.chrono>jeu.j4.chrono)
                 {
-                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j2.nom,jeu.j2.chrono);
+                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j2.nom,jeu.j2.chrono);
                     nextj->score-=2;
                 }
                 if(jeu.j3.chrono>jeu.j2.chrono&&jeu.j3.chrono>jeu.j1.chrono&&jeu.j3.chrono>jeu.j4.chrono)
                 {
-                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j3.nom,jeu.j3.chrono);
+                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j3.nom,jeu.j3.chrono);
                     nextj->score-=2;
                 }
                 if(jeu.j4.chrono>jeu.j2.chrono && jeu.j4.chrono>jeu.j3.chrono && jeu.j4.chrono>jeu.j1.chrono)
                 {
-                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j4.nom,jeu.j4.chrono);
+                    printf("  Joueur le plus rapide : %s avec %d sec\n",jeu.j4.nom,jeu.j4.chrono);
                     nextj->score-=2;
                 }
-                printf("Appuiez sur espace pour revenir au menue principal\n");//on attend que le joueur appuie sur espace pour revenir au menu
+                Color(12,0);
+                printf("\n");
+                printf(" APPUYER SUR LA TOUCHE ESPACE POUR QUITTER\n");//on attend que le joueur appuie sur espace pour revenir au menu
                 char c=toucheAppuiez();
                 if(c==' ')
                 {
@@ -509,7 +526,7 @@ int round(struct joueur *j, struct jeu *jeu)//methode de fonctionement du round
                 }
                 else
                 {
-                    strcpy(message,"ERREUR: vous n'avez plus de bariere a placer");// si le joueur ne peut plus placer de bariere
+                    strcpy(message,"ERREUR: vous n'avez plus de barriere a placer");// si le joueur ne peut plus placer de bariere
                 }
                 break;
             case 3://si le joueur ne veux rien faire

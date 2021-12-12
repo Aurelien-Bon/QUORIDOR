@@ -1,28 +1,37 @@
 # depslib dependency file v1.0
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
+205 <<<<<<< Updated upstream
+
 1639351833 source:c:\users\aurel\documents\github\quoridor\main.c
-=======
-1639347581 source:c:\users\aurel\documents\github\quoridor\main.c
->>>>>>> Stashed changes
-=======
-1639347581 source:c:\users\aurel\documents\github\quoridor\main.c
->>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
 	<time.h>
 	<windows.h>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-1639349885 c:\users\aurel\documents\github\quoridor\terrain.h
-=======
-1639349472 c:\users\aurel\documents\github\quoridor\terrain.h
->>>>>>> Stashed changes
-=======
-1639349472 c:\users\aurel\documents\github\quoridor\terrain.h
->>>>>>> Stashed changes
+1639348796 shed changes
+	<stdio.h>
+	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
+	"bariere.h"
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu.h"
+	<windows.h>
+	<string.h>
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+	"crosshaire.h"
+
+1639348234 ated upstream
+
+1639352173 c:\users\aurel\documents\github\quoridor\terrain.h
 
 1639349885 source:c:\users\aurel\documents\github\quoridor\terrain.c
 	"terrain.h"
@@ -75,53 +84,21 @@
 	<stdio.h>
 	<windows.h>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-1639349885 source:c:\users\aurel\documents\github\quoridor\bariere.c
-=======
-1639348382 source:c:\users\aurel\documents\github\quoridor\bariere.c
->>>>>>> Stashed changes
-=======
-1639348382 source:c:\users\aurel\documents\github\quoridor\bariere.c
->>>>>>> Stashed changes
+1639352173 source:c:\users\aurel\documents\github\quoridor\bariere.c
 	"bariere.h"
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-1639349885 c:\users\aurel\documents\github\quoridor\bariere.h
+1639352173 c:\users\aurel\documents\github\quoridor\bariere.h
 
-1639349885 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
+1639352173 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
 	"crosshaire.h"
 	<stdlib.h>
 
-1639349885 c:\users\aurel\documents\github\quoridor\crosshaire.h
+1639352173 c:\users\aurel\documents\github\quoridor\crosshaire.h
 
 1639351474 source:c:\users\aurel\documents\github\quoridor\jeu.c
-=======
-1639348370 c:\users\aurel\documents\github\quoridor\bariere.h
-
-1639348590 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
-	"crosshaire.h"
-	<stdlib.h>
-
-1639348592 c:\users\aurel\documents\github\quoridor\crosshaire.h
-
-1639347593 source:c:\users\aurel\documents\github\quoridor\jeu.c
->>>>>>> Stashed changes
-=======
-1639348370 c:\users\aurel\documents\github\quoridor\bariere.h
-
-1639348590 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
-	"crosshaire.h"
-	<stdlib.h>
-
-1639348592 c:\users\aurel\documents\github\quoridor\crosshaire.h
-
-1639347593 source:c:\users\aurel\documents\github\quoridor\jeu.c
->>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -129,31 +106,15 @@
 	<windows.h>
 	<string.h>
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-1639349885 c:\users\aurel\documents\github\quoridor\jeu.h
-=======
-1639348234 c:\users\aurel\documents\github\quoridor\jeu.h
->>>>>>> Stashed changes
-=======
-1639348234 c:\users\aurel\documents\github\quoridor\jeu.h
->>>>>>> Stashed changes
+1639352173 c:\users\aurel\documents\github\quoridor\jeu.h
 	"joueur.h"
 	"terrain.h"
 	"bariere.h"
 
-<<<<<<< Updated upstream
-<<<<<<< Updated upstream
-1639349885 c:\users\aurel\documents\github\quoridor\joueur.h
-=======
-1639348796 c:\users\aurel\documents\github\quoridor\joueur.h
->>>>>>> Stashed changes
-=======
-1639348796 c:\users\aurel\documents\github\quoridor\joueur.h
->>>>>>> Stashed changes
+1639352173 c:\users\aurel\documents\github\quoridor\joueur.h
 	"crosshaire.h"
 
-1639349885 source:c:\users\aurel\documents\github\quoridor\joueur.c
+1639352173 source:c:\users\aurel\documents\github\quoridor\joueur.c
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"

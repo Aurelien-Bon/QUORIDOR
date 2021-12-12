@@ -15,6 +15,6 @@ typedef struct terrain
 struct terrain creeTerrain();
 void affichageTerrain(struct terrain terrain);
 int checkMouve(t_terrain t,int x,int y);
-int checkCase(int x,int y,struct terrain t);
+int checkCase(int x,int y,struct terrain *t);
 void afficherCase(struct terrain terrain);
 #endif // TERRAIN_H_INCLUDED

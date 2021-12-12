@@ -311,6 +311,18 @@ void oldGame(struct jeu *jeu)
             jeu->bariere[i].active=atoi(p);
         }
         fscanf(f,"%d",&jeu->etat);
+        for(int i=0;i<7;i++)
+        {
+            fscanf(f,"%s",&chaine);
+            char *p=strtok(chaine, ",");
+            jeu->terrain.casebonus[i].active=atoi(p);
+            p=strtok(NULL, ",");
+            jeu->terrain.casebonus[i].x=atoi(p);
+            p=strtok(NULL, ",");
+            jeu->terrain.casebonus[i].y=atoi(p);
+            p=strtok(NULL, ",");
+            jeu->terrain.casebonus[i].valeur=atoi(p);
+        }
     }
     fclose(f);
 }
@@ -776,7 +788,7 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                     break;
                 case ' ':
                     quitter=1;
-                    j->score+=checkCase(j->crosshaire.cor_x,j->crosshaire.cor_y,jeu->terrain);
+                    j->score+=checkCase(j->crosshaire.cor_x,j->crosshaire.cor_y,&jeu->terrain);
                     break;
             }
         }while(quitter==0);
@@ -1217,7 +1229,11 @@ int enregistrement(struct jeu jeu)
         {
             fprintf(f,"%d,%d,%d,%d,%d,%c,%d\n",jeu.bariere[i].id,jeu.bariere[i].cord_x1,jeu.bariere[i].cord_y1,jeu.bariere[i].cord_x2,jeu.bariere[i].cord_y2,jeu.bariere[i].sens,jeu.bariere[i].active);
         }
-        fprintf(f,"%d",jeu.etat);
+        fprintf(f,"%d\n",jeu.etat);
+        for(int i=0;i<7;i++)
+        {
+            fprintf(f,"%d,%d,%d,%d\n",jeu.terrain.casebonus[i].active,jeu.terrain.casebonus[i].x,jeu.terrain.casebonus[i].y,jeu.terrain.casebonus[i].valeur);
+        }
     }
     fclose(f);
 

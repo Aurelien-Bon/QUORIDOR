@@ -16,7 +16,7 @@ struct CaseBonus CaseRand()
     t_CaseBonus N={0};
     N.x=1+rand()%7;
     N.y=1+rand()%7;
-    N.valeur=rand()%5;
+    N.valeur=1+rand()%3;
     N.active=1;
     return N;
 }
@@ -113,17 +113,17 @@ void affichageTerrain( struct terrain terrain)
         }
     }
 }
-int checkCase(int x,int y,struct terrain t)
+int checkCase(int x,int y,struct terrain *t)
 {
     int val=0;
     for(int i=0;i<7;i++)
     {
-        if(t.casebonus[i].x==x&&t.casebonus[i].active==1)
+        if(t->casebonus[i].x==x&&t->casebonus[i].active==1)
         {
-            if(t.casebonus[i].y==y)
+            if(t->casebonus[i].y==y)
             {
-                val=t.casebonus[i].valeur;
-                t.casebonus[i].active=0;
+                val=t->casebonus[i].valeur;
+                t->casebonus[i].active=0;
             }
         }
     }
@@ -135,7 +135,7 @@ void afficherCase(struct terrain terrain)
     {
         if(terrain.casebonus[i].active==1)
         {
-            gotoligcol(terrain.casebonus[i].x*2+2,terrain.casebonus[i].y*4+6);
+            gotoligcol(terrain.casebonus[i].y*2+2,terrain.casebonus[i].x*4+6);
             Color(8,0);
             printf("%d",terrain.casebonus[i].valeur);
             Color(15,0);

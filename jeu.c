@@ -183,9 +183,9 @@ void oldGame(struct jeu *jeu)
             nextj->nb_bariere=atoi(p);
             p= strtok(NULL, ",");
             nextj->startside=p;
-            nextj=nextj->next;
             //p= strtok(NULL, ",");
             //nextj->chrono=atoi(p);
+            nextj=nextj->next;
         }
         for(int i=0;i<20;i++)
         {
@@ -464,7 +464,7 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                     {
                         if(j->crosshaire.cor_x-1>x-2&&j->crosshaire.cor_y==y)
                         {
-                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x-1,j->crosshaire.cor_y,'d')!=0)
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x-1,j->crosshaire.cor_y,'g')==0)
                             {
                                j->crosshaire.cor_x-=1;
                             }
@@ -475,26 +475,17 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                     if(j->crosshaire.cor_x+1<9)//on sort par la droit
                         if(j->crosshaire.cor_x+1<x+2&&j->crosshaire.cor_y==y)
                         {
-                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'g')!=0)
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'d')==0)
                             {
                                j->crosshaire.cor_x+=1;
                             }
-                                /*
-                                if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'q')==2)
-                                {
-                                   j->crosshaire.cor_x+=2;
-                                }
-                                else
-                                {
-                                   j->crosshaire.cor_x+=1;
-                                }*/
                         }
                     break;
                 case 'z':
                     if(j->crosshaire.cor_y-1>=0)//on sort par le haut
                         if(j->crosshaire.cor_y-1>y-2&&j->crosshaire.cor_x==x)
                         {
-                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'h')!=0)
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y-1,'h')==0)
                             {
                                j->crosshaire.cor_y-=1;
                             }
@@ -504,7 +495,7 @@ void deplacement(struct joueur *j,struct jeu *jeu)
                     if(j->crosshaire.cor_y+1<9)//on sort par le bas
                         if(j->crosshaire.cor_y+1<y+2&&j->crosshaire.cor_x==x)
                         {
-                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x+1,j->crosshaire.cor_y,'b')!=0)
+                            if(deplacementPossible(*jeu,*j,j->crosshaire.cor_x,j->crosshaire.cor_y+1,'b')==0)
                             {
                                j->crosshaire.cor_y+=1;
                             }
@@ -524,37 +515,104 @@ void deplacement(struct joueur *j,struct jeu *jeu)
 }
 int deplacementPossible(struct jeu jeu, struct joueur j, int x, int y,char sens)
 {
-    int pos = 1;
-    for(int i=0;i<20;i++)//pas de bariere sur le chemin
+    int pos=0;
+    gotoligcol(30,0);
+    for(int i=0;i<20;i++)
     {
+
         if(jeu.bariere[i].active==1)
         {
-            if(jeu.bariere[i].sens=='h'&&sens=='b')
+
+            if(sens=='h')
             {
-                if(jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y-1||jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y-1)
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
                 {
-                    pos = 0;
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y-1)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y-1)
+                {
+                    pos=1;
                 }
             }
-            if(jeu.bariere[i].sens=='b'&&sens=='b')
+            if(sens=='b')
             {
-                if(jeu.bariere[i].cord_x1==x&&jeu.bariere[i].cord_y1==y||jeu.bariere[i].cord_x2==x&&jeu.bariere[i].cord_y2==y)
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
                 {
-                    pos = 0;
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='b'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1-1==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='h'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2-1==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+            }
+            if(sens=='d')
+            {
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x1-1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x2-1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+            }
+            if(sens=='g')
+            {
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='g'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x1==j.crosshaire.cor_x-1&&jeu.bariere[i].cord_y1==j.crosshaire.cor_y)
+                {
+                    pos=1;
+                }
+                if(jeu.bariere[i].sens=='d'&&jeu.bariere[i].cord_x2==j.crosshaire.cor_x-1&&jeu.bariere[i].cord_y2==j.crosshaire.cor_y)
+                {
+                    pos=1;
                 }
             }
         }
     }
     struct joueur *nextj=jeu.ordrejeu.j;
-    for(int i=0;i<jeu.nbjoueur;i++)//piont enemie sur le chemin
+    for(int i=0;i<jeu.nbjoueur;i++)
     {
         if(strcmp(nextj->nom,j.nom)!=0)
         {
-            if(nextj->crosshaire.cor_x==x&&nextj->crosshaire.cor_y==y)
+            printf("%s:%d,%d,%d,%d\n",nextj->nom,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,x,y);
+            if(nextj->crosshaire.cor_x==x&&nextj->crosshaire.cor_x==y)
             {
-                pos = 0;
+                pos=1;
             }
         }
+
         nextj=nextj->next;
     }
     return pos;

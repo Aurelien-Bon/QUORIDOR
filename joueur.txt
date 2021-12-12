@@ -11,6 +11,7 @@ JeanMich,0
 FZDs,0
 DMZS,0
 VAd,0
+<<<<<<< Updated upstream
 tom,0
 paul,0
 tommy,0
@@ -21,3 +22,7 @@ arueline,0
 pierre,0
 jacque,0
 anwar,0
+=======
+As,0
+DAs,0
+>>>>>>> Stashed changes

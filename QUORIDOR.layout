@@ -2,21 +2,29 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 	<File name="jeu.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
+=======
+	<File name="terrain.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		<Cursor>
-			<Cursor1 position="16808" topLine="1390" />
+			<Cursor1 position="418" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="crosshaire.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="crosshaire.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
+<<<<<<< HEAD
 			<Cursor1 position="0" topLine="0" />
 =======
 	<File name="jeu.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="2232" topLine="0" />
 >>>>>>> Stashed changes
+=======
+			<Cursor1 position="226" topLine="0" />
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		</Cursor>
 		<Folding>
 			<Collapse line="8" />
@@ -24,6 +32,7 @@
 			<Collapse line="22" />
 		</Folding>
 	</File>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 	<File name="terrain.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
@@ -43,6 +52,11 @@
 		<Cursor>
 			<Cursor1 position="57026" topLine="2" />
 >>>>>>> Stashed changes
+=======
+	<File name="bariere.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		</Cursor>
 		<Folding>
 			<Collapse line="8" />
@@ -50,15 +64,20 @@
 			<Collapse line="22" />
 		</Folding>
 	</File>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 <<<<<<< Updated upstream
 	<File name="bariere.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+	<File name="joueur.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="crosshaire.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="jeu.c" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="1" zoom_2="0">
 		<Cursor>
+<<<<<<< HEAD
 			<Cursor1 position="226" topLine="0" />
 =======
 	<File name="bariere.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -74,6 +93,12 @@
 	</File>
 <<<<<<< Updated upstream
 	<File name="joueur.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+=======
+			<Cursor1 position="20902" topLine="1324" />
+		</Cursor>
+	</File>
+	<File name="crosshaire.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		<Cursor>
 			<Cursor1 position="0" topLine="0" />
 =======
@@ -85,6 +110,7 @@
 	</File>
 	<File name="crosshaire.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 			<Cursor1 position="393" topLine="105" />
 =======
@@ -113,10 +139,19 @@
 		<Cursor>
 <<<<<<< Updated upstream
 			<Cursor1 position="1291" topLine="59" />
+=======
+			<Cursor1 position="393" topLine="117" />
 		</Cursor>
 	</File>
-	<File name="jeu.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="bariere.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
+			<Cursor1 position="0" topLine="0" />
+>>>>>>> parent of 0f4d4e3 (version 2.0)
+		</Cursor>
+	</File>
+	<File name="main.c" open="1" top="0" tabpos="1" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+<<<<<<< HEAD
 			<Cursor1 position="1136" topLine="14" />
 =======
 			<Cursor1 position="193" topLine="0" />
@@ -159,12 +194,21 @@
 		<Cursor>
 			<Cursor1 position="3628" topLine="19" />
 >>>>>>> Stashed changes
+=======
+			<Cursor1 position="6165" topLine="107" />
+		</Cursor>
+	</File>
+	<File name="jeu.h" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1136" topLine="26" />
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		</Cursor>
 		<Folding>
 			<Collapse line="5" />
 			<Collapse line="24" />
 		</Folding>
 	</File>
+<<<<<<< HEAD
 <<<<<<< Updated upstream
 	<File name="bariere.h" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 =======
@@ -180,8 +224,11 @@
 >>>>>>> Stashed changes
 =======
 >>>>>>> Stashed changes
+=======
+	<File name="joueur.c" open="1" top="1" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+>>>>>>> parent of 0f4d4e3 (version 2.0)
 		<Cursor>
-			<Cursor1 position="0" topLine="0" />
+			<Cursor1 position="1291" topLine="101" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

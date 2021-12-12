@@ -6,15 +6,15 @@
 int main()
 {
     srand(time(NULL));
-    menu();//appelle methode menue
+    menu();
     return 0;
 }
 
-void regleJeu()//methode d'affichage des regle de jeu
+void regleJeu()
 {
     int quitter = 0;
     char c;
-    while (quitter == 0)//s'affiche jusqu'a ce que l'utilisateur appuie sur espace
+    while (quitter == 0)
     {
         printf("   ______________________________________________________________________         \n");
         printf("  |                                                                      |        \n");
@@ -62,7 +62,7 @@ void regleJeu()//methode d'affichage des regle de jeu
 }
 
 
-void scoreJoueur()//methode d'affichage des 10 meilleur joueur
+void scoreJoueur()
 {
     FILE* fichier = NULL;
     int score[100];
@@ -71,7 +71,7 @@ void scoreJoueur()//methode d'affichage des 10 meilleur joueur
     char *token;
     int quitter=0;
     int nb=0;
-    fichier = fopen("joueur.txt", "r");//lecture du fichier
+    fichier = fopen("joueur.txt", "r");
     if (fichier != NULL)
     {
         while(!feof(fichier))
@@ -79,7 +79,7 @@ void scoreJoueur()//methode d'affichage des 10 meilleur joueur
 
             fscanf(fichier, "%s",ligne);
             token = strtok(ligne, ",");
-            strcpy(pseudoLue[nb],token);//on enregistre le pseudo et le score
+            strcpy(pseudoLue[nb],token);
             token = strtok(NULL,",");
             score[nb]=atoi(token);
             nb++;
@@ -89,7 +89,7 @@ void scoreJoueur()//methode d'affichage des 10 meilleur joueur
     int tri=0;
     int scorec;
     char pseudoc[50];
-    while(tri==0)//on fait un trie par rapport au score
+    while(tri==0)
     {
         tri=1;
         for(int i=0;i<nb-1;i++)
@@ -106,7 +106,7 @@ void scoreJoueur()//methode d'affichage des 10 meilleur joueur
             }
         }
     }
-    while(quitter==0)//on affiche les 10 premier
+    while(quitter==0)
     {
         Color(11,0);
         printf("   ____________________________________         \n");
@@ -141,7 +141,7 @@ void scoreJoueur()//methode d'affichage des 10 meilleur joueur
     }
 }
 
-void menu()//methode menue
+void menu()
 {
     int finpartie = 0;
     while(finpartie == 0)
@@ -149,7 +149,7 @@ void menu()//methode menue
         int choix=1;
         int quitter=0;
         char c;
-        while(quitter==0)//on affiche jusqu'a ce que l'utilisateur ai fait son choix
+        while(quitter==0)
         {
             system("cls");
             Color(11,0);
@@ -197,23 +197,23 @@ void menu()//methode menue
         system("cls");
         switch(choix)
         {
-            case 1 ://choix de cree une nouvelle partie
+            case 1 :
                 startGame(0);
                 break;
 
-            case 2 ://choix de lancer une ancienne partie
+            case 2 :
                 startGame(1);
                 break;
 
-            case 3 ://choix de lire les regle du jeu
+            case 3 :
                 regleJeu();
                 break;
 
-            case 4 ://choix d'afficher le score des meilleur joueur
+            case 4 :
                 scoreJoueur();
                 break;
 
-            case 5 ://choix de quitter
+            case 5 :
                 quitter = 1;
                 finpartie = 1;
                 system("cls");

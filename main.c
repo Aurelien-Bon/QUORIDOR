@@ -14,7 +14,6 @@ void regleJeu()
 {
     int quitter = 0;
     char c;
-    c=toucheAppuiez();
     while (quitter == 0)
     {
         printf("   ______________________________________________________________________         \n");
@@ -52,9 +51,9 @@ void regleJeu()
         printf("  |       choisir de bifurquer a droite ou a gauche du pion saute.       |        \n");
         printf("  |______________________________________________________________________|      \n\n");
         Color(12,0);
-        printf("                 APPUYER SUR LA TOUCHE ENTREE POUR QUITTER                        \n");
-        scanf("%c", &c);
+        printf("                 APPUYER SUR LA TOUCHE ESPACE POUR QUITTER                        \n");
         Color(15,0);
+        c=toucheAppuiez();
         if(c==' ')
             {
                 quitter=1;
@@ -62,24 +61,68 @@ void regleJeu()
     }
 }
 
-/*
+
 void scoreJoueur()
 {
     FILE* fichier = NULL;
-    int score[3] = {0}; // Tableau des 3 meilleurs scores
-
+    int score[100];
+    char ligne[70];
+    char pseudoLue[100][50];
+    char *token;
+    int quitter=0;
+    int nb=0;
     fichier = fopen("joueur.txt", "r");
-
     if (fichier != NULL)
     {
-        fscanf(fichier, "%d %d %d", &score[0], &score[1], &score[2]);
-        printf("Les meilleurs scores sont : %d, %d et %d", score[0], score[1], score[2]);
+        while(!feof(fichier))
+        {
 
+            fscanf(fichier, "%s",ligne);
+            token = strtok(ligne, ",");
+            strcpy(pseudoLue[nb],token);
+            token = strtok(NULL,",");
+            score[nb]=atoi(token);
+            nb++;
+        }
         fclose(fichier);
     }
-
-    return 0;
-}*/
+    int tri=0;
+    int scorec;
+    char pseudoc[50];
+    while(tri==0)
+    {
+        tri=1;
+        for(int i=0;i<nb-1;i++)
+        {
+            if(score[i+1]>score[i])
+            {
+                tri=0;
+                scorec=score[i];
+                score[i]=score[i+1];
+                score[i+1]=scorec;
+                strcpy(pseudoc,pseudoLue[i]);
+                strcpy(pseudoLue[i],pseudoLue[i+1]);
+                strcpy(pseudoLue[i+1],pseudoc);
+            }
+        }
+    }
+    while(quitter==0)
+    {
+        printf("Les scores sont :\n");
+        for(int i=0;i<nb;i++)
+        {
+            if(score[i]!=0)
+            {
+               printf("%s avec un score de %d\n",pseudoLue[i],score[i]);
+            }
+        }
+        char c=toucheAppuiez();
+        if(c==' ')
+        {
+            quitter=1;
+        }
+    }
+}
 
 void menu()
 {
@@ -150,7 +193,7 @@ void menu()
                 break;
 
             case 4 :
-                //scoreJoueur();
+                scoreJoueur();
                 break;
 
             case 5 :

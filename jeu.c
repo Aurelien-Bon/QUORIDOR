@@ -57,7 +57,32 @@ void newGame(struct jeu *jeu)
     if(nb==1)
     {
         jeu->j1=creeJoueur();
-        jeu->j2=creeJoueur();
+        int ok=0;
+        while(ok==0)
+        {
+            jeu->j2=creeJoueur();
+            if(strcmp(jeu->j2.nom,jeu->j1.nom)==0)
+            {
+                printf("Erreur joueur deja conecter\n");
+            }
+            else
+            {
+                ok=1;
+            }
+        }
+
+        ok=0;
+        while(ok==0)
+        {
+           if(jeu->j2.crosshaire.type==jeu->j1.crosshaire.type)
+           {
+               jeu->j2.crosshaire=creeCrossaire();
+           }
+           else
+           {
+               ok=1;
+           }
+        }
         jeu->nbjoueur=2;
         jeu->j1.nb_bariere=10;
         jeu->j2.nb_bariere=10;
@@ -77,12 +102,84 @@ void newGame(struct jeu *jeu)
             jeu->j2.startside='B';
         }
     }
-    else
+    else if(nb==2)
     {
         jeu->j1=creeJoueur();
-        jeu->j2=creeJoueur();
-        jeu->j3=creeJoueur();
-        jeu->j4=creeJoueur();
+        int ok=0;
+        while(ok==0)
+        {
+            jeu->j2=creeJoueur();
+            if(strcmp(jeu->j2.nom,jeu->j1.nom)==0)
+            {
+                printf("Erreur joueur deja conecter\n");
+            }
+            else
+            {
+                ok=1;
+            }
+        }
+        ok=0;
+        while(ok==0)
+        {
+            jeu->j3=creeJoueur();
+            if(strcmp(jeu->j3.nom,jeu->j1.nom)==0||strcmp(jeu->j3.nom,jeu->j2.nom)==0)
+            {
+                printf("Erreur joueur deja conecter\n");
+            }
+            else
+            {
+                ok=1;
+            }
+        }
+        ok=0;
+        while(ok==0)
+        {
+            jeu->j4=creeJoueur();
+            if(strcmp(jeu->j4.nom,jeu->j1.nom)==0||strcmp(jeu->j4.nom,jeu->j2.nom)==0||strcmp(jeu->j4.nom,jeu->j3.nom)==0)
+            {
+                printf("Erreur joueur deja conecter\n");
+            }
+            else
+            {
+                ok=1;
+            }
+        }
+        ok=0;
+        while(ok==0)
+        {
+           if(jeu->j2.crosshaire.type==jeu->j1.crosshaire.type)
+           {
+               jeu->j2.crosshaire=creeCrossaire();
+           }
+           else
+           {
+               ok=1;
+           }
+        }
+        ok=0;
+        while(ok==0)
+        {
+           if(jeu->j3.crosshaire.type==jeu->j1.crosshaire.type||jeu->j3.crosshaire.type==jeu->j2.crosshaire.type)
+           {
+               jeu->j3.crosshaire=creeCrossaire();
+           }
+           else
+           {
+               ok=1;
+           }
+        }
+        ok=0;
+        while(ok==0)
+        {
+           if(jeu->j4.crosshaire.type==jeu->j1.crosshaire.type||jeu->j4.crosshaire.type==jeu->j2.crosshaire.type||jeu->j4.crosshaire.type==jeu->j3.crosshaire.type)
+           {
+               jeu->j4.crosshaire=creeCrossaire();
+           }
+           else
+           {
+               ok=1;
+           }
+        }
         jeu->nbjoueur=4;
         jeu->j1.nb_bariere=5;
         jeu->j2.nb_bariere=5;
@@ -153,6 +250,8 @@ void oldGame(struct jeu *jeu)
         if(jeu->nbjoueur==2)
         {
             jeu->ordrejeu.j=&jeu->j1;
+            jeu->j1.startside='B';
+            jeu->j2.startside='H';
             jeu->j1.next=&jeu->j2;
             jeu->j2.next=&jeu->j1;
         }
@@ -163,6 +262,10 @@ void oldGame(struct jeu *jeu)
             jeu->j2.next=&jeu->j3;
             jeu->j3.next=&jeu->j4;
             jeu->j4.next=&jeu->j1;
+            jeu->j1.startside='B';
+            jeu->j2.startside='G';
+            jeu->j3.startside='H';
+            jeu->j4.startside='D';
         }
         struct joueur *nextj=jeu->ordrejeu.j;
         for(int i=0;i<jeu->nbjoueur;i++)
@@ -182,9 +285,7 @@ void oldGame(struct jeu *jeu)
             p= strtok(NULL, ",");
             nextj->nb_bariere=atoi(p);
             p= strtok(NULL, ",");
-            nextj->startside=p;
-            //p= strtok(NULL, ",");
-            //nextj->chrono=atoi(p);
+            nextj->chrono=atoi(p);
             nextj=nextj->next;
         }
         for(int i=0;i<20;i++)
@@ -216,45 +317,31 @@ void startGame(int load)
         newGame(&jeu);
     else
         oldGame(&jeu);
-    printf("jeu etat: %d, ",jeu.etat);
-    //printf("next joueur: %s\n", jeu.ordrejeu.j->nom);
     t_joueur *nextj=jeu.ordrejeu.j;
     int finJeu=0;
 
     while(finJeu==0)
     {
         time_t start = time (NULL);
-        if(nextj->crosshaire.cor_x==-1)
+        if(nextj->crosshaire.cor_x==-1&&nextj->crosshaire.cor_y==-1)
+        {
+            jeu.etat=0;
+        }
+        else
+        {
+            jeu.etat=1;
+        }
+        if(jeu.etat==0)
         {
             deplacement(nextj,&jeu);
         }
-        finJeu=round(nextj,&jeu);
+        else
+        {
+            finJeu=round(nextj,&jeu);
+        }
         nextj->chrono+=(int) (time (NULL) - start);
         if(testFinJeu(nextj)==1)
         {
-            printf("Victoire de %s il remporte 5 point",nextj->nom);
-            nextj->score+=5;
-            finJeu=1;
-            if(jeu.j1.chrono>jeu.j2.chrono&&jeu.j1.chrono>jeu.j3.chrono&&jeu.j1.chrono>jeu.j4.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j1.nom);
-                nextj->score-=2;
-            }
-            if(jeu.j2.chrono>jeu.j1.chrono&&jeu.j2.chrono>jeu.j3.chrono&&jeu.j2.chrono>jeu.j4.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j2.nom);
-                nextj->score-=2;
-            }
-            if(jeu.j3.chrono>jeu.j2.chrono&&jeu.j3.chrono>jeu.j1.chrono&&jeu.j3.chrono>jeu.j4.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j3.nom);
-                nextj->score-=2;
-            }
-            if(jeu.j4.chrono>jeu.j2.chrono && jeu.j4.chrono>jeu.j3.chrono && jeu.j4.chrono>jeu.j1.chrono)
-            {
-                printf("Le joueur le plus lent a ete: %s",jeu.j4.nom);
-                nextj->score-=2;
-            }
             setScore(jeu.j1.nom,jeu.j1.score);
             setScore(jeu.j2.nom,jeu.j2.score);
             if(jeu.nbjoueur==4)
@@ -262,21 +349,55 @@ void startGame(int load)
                 setScore(jeu.j3.nom,jeu.j3.score);
                 setScore(jeu.j4.nom,jeu.j4.score);
             }
+            int quitter=0;
+            system("cls");
+            gotoligcol(0,0);
+            while(quitter==0)
+            {
+                printf("Victoire de %s il remporte 5 point\n",nextj->nom);
+                nextj->score+=5;
+                finJeu=1;
+                if(jeu.j1.chrono>jeu.j2.chrono&&jeu.j1.chrono>jeu.j3.chrono&&jeu.j1.chrono>jeu.j4.chrono)
+                {
+                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j1.nom,jeu.j1.chrono);
+                    nextj->score-=2;
+                }
+                if(jeu.j2.chrono>jeu.j1.chrono&&jeu.j2.chrono>jeu.j3.chrono&&jeu.j2.chrono>jeu.j4.chrono)
+                {
+                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j2.nom,jeu.j2.chrono);
+                    nextj->score-=2;
+                }
+                if(jeu.j3.chrono>jeu.j2.chrono&&jeu.j3.chrono>jeu.j1.chrono&&jeu.j3.chrono>jeu.j4.chrono)
+                {
+                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j3.nom,jeu.j3.chrono);
+                    nextj->score-=2;
+                }
+                if(jeu.j4.chrono>jeu.j2.chrono && jeu.j4.chrono>jeu.j3.chrono && jeu.j4.chrono>jeu.j1.chrono)
+                {
+                    printf("Le joueur le plus lent a ete: %s avec %d s\n",jeu.j4.nom,jeu.j4.chrono);
+                    nextj->score-=2;
+                }
+                printf("Appuiez sur espace pour revenir au menue principal\n");
+                char c=toucheAppuiez();
+                if(c==' ')
+                {
+                    quitter=1;
+                }
+            }
         }
         nextj=nextj->next;
-        //affichage(jeu.terrain);
     }
 }
 int round(struct joueur *j, struct jeu *jeu)
 {
     char message[100]={' '};
-    //affichierJoueur(*j);
 
     int choix=1;
     char c;
     int tourjouer=0;
     while(tourjouer==0)
     {
+
         int quitter=0;
         while(quitter==0)
         {
@@ -422,27 +543,128 @@ void deplacement(struct joueur *j,struct jeu *jeu)
 {
     int x=j->crosshaire.cor_x;
     int y=j->crosshaire.cor_y;
-    if(x==-1&&y==-1)
+    if(jeu->etat==0)
     {
+        int quitter=0;
         if(j->startside=='B')
         {
             j->crosshaire.cor_x=5;
             j->crosshaire.cor_y=8;
+            while(quitter==0)
+            {
+                affichage(*jeu,*j);
+                gotoligcol(22,0);
+                printf("Placer votre pion pour commencer");
+                char c=toucheAppuiez();
+                switch(c)
+                {
+                    case 'q':
+                        if(j->crosshaire.cor_x-1>=0)
+                        {
+                            j->crosshaire.cor_x-=1;
+                        }
+                        break;
+                    case 'd':
+                        if(j->crosshaire.cor_x+1<9)//on sort par la droit
+                        {
+                            j->crosshaire.cor_x+=1;
+                        }
+                        break;
+                    case ' ':
+                        quitter=1;
+                        break;
+                }
+            }
         }
         if(j->startside=='H')
         {
             j->crosshaire.cor_x=5;
             j->crosshaire.cor_y=0;
+            while(quitter==0)
+            {
+                affichage(*jeu,*j);
+                gotoligcol(22,0);
+                printf("Placer votre pion pour commencer");
+                char c=toucheAppuiez();
+                switch(c)
+                {
+                    case 'q':
+                        if(j->crosshaire.cor_x-1>=0)
+                        {
+                            j->crosshaire.cor_x-=1;
+                        }
+                        break;
+                    case 'd':
+                        if(j->crosshaire.cor_x+1<9)//on sort par la droit
+                        {
+                            j->crosshaire.cor_x+=1;
+                        }
+                        break;
+                    case ' ':
+                        quitter=1;
+                        break;
+                }
+            }
         }
         if(j->startside=='G')
         {
             j->crosshaire.cor_x=0;
             j->crosshaire.cor_y=5;
+            while(quitter==0)
+            {
+                affichage(*jeu,*j);
+                gotoligcol(22,0);
+                printf("Placer votre pion pour commencer");
+                char c=toucheAppuiez();
+                switch(c)
+                {
+                    case 'z':
+                        if(j->crosshaire.cor_y-1>=0)
+                        {
+                            j->crosshaire.cor_y-=1;
+                        }
+                        break;
+                    case 's':
+                        if(j->crosshaire.cor_y+1<9)//on sort par le bas
+                        {
+                            j->crosshaire.cor_y+=1;
+                        }
+                        break;
+                    case ' ':
+                        quitter=1;
+                        break;
+                }
+            }
         }
         if(j->startside=='D')
         {
             j->crosshaire.cor_x=8;
             j->crosshaire.cor_y=5;
+            while(quitter==0)
+            {
+                affichage(*jeu,*j);
+                gotoligcol(22,0);
+                printf("Placer votre pion pour commencer");
+                char c=toucheAppuiez();
+                switch(c)
+                {
+                    case 'z':
+                        if(j->crosshaire.cor_y-1>=0)
+                        {
+                            j->crosshaire.cor_y-=1;
+                        }
+                        break;
+                    case 's':
+                        if(j->crosshaire.cor_y+1<9)//on sort par le bas
+                        {
+                            j->crosshaire.cor_y+=1;
+                        }
+                        break;
+                    case ' ':
+                        quitter=1;
+                        break;
+                }
+            }
         }
     }
     else
@@ -606,7 +828,7 @@ int deplacementPossible(struct jeu jeu, struct joueur j, int x, int y,char sens)
     {
         if(strcmp(nextj->nom,j.nom)!=0)
         {
-            printf("%s:%d,%d,%d,%d\n",nextj->nom,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,x,y);
+            //printf("%s:%d,%d,%d,%d\n",nextj->nom,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,x,y);
             if(nextj->crosshaire.cor_x==x&&nextj->crosshaire.cor_x==y)
             {
                 pos=1;
@@ -908,17 +1130,17 @@ void deplacementBariere(struct jeu *j,int nb,int x,int y,int direction)
 }
 int testFinJeu(struct joueur *j)
 {
-    if(j->startside=='b')
-        if(j->crosshaire.cor_x==0)
-            return 1;
-    else if(j->startside=='d')
+    if(j->startside=='B')
         if(j->crosshaire.cor_y==0)
             return 1;
-    else if(j->startside=='g')
-        if(j->crosshaire.cor_y==8)
+    else if(j->startside=='D')
+        if(j->crosshaire.cor_x==0)
             return 1;
-    else if(j->startside=='h')
+    else if(j->startside=='G')
         if(j->crosshaire.cor_x==8)
+            return 1;
+    else if(j->startside=='H')
+        if(j->crosshaire.cor_y==8)
             return 1;
     return 0;
 
@@ -938,7 +1160,7 @@ int enregistrement(struct jeu jeu)
         struct joueur *nextj=jeu.ordrejeu.j;
         for(int i=0;i<jeu.nbjoueur;i++)
         {
-            fprintf(f,"%s,%d,%c,%d,%d,%d,%c\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->startside);
+            fprintf(f,"%s,%d,%c,%d,%d,%d,%d\n",nextj->nom,nextj->score,nextj->crosshaire.type,nextj->crosshaire.cor_x,nextj->crosshaire.cor_y,nextj->nb_bariere,nextj->chrono);
             nextj=nextj->next;
         }
         for(int i=0;i<20;i++)

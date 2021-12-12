@@ -2,7 +2,7 @@
 Wanders,1
 wanders,6
 mao,13
-alex,0
+alex,1
 aurel,0
 ado,0
 SDAS,0
@@ -11,7 +11,7 @@ JeanMich,0
 FZDs,0
 DMZS,0
 VAd,0
-tom,0
+tom,2
 paul,10
 tommy,0
 annie,0

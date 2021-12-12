@@ -108,14 +108,31 @@ void scoreJoueur()
     }
     while(quitter==0)
     {
-        printf("Les scores sont :\n");
-        for(int i=0;i<nb;i++)
+        Color(11,0);
+        printf("   ____________________________________         \n");
+        printf("  |                                    |        \n");
+        printf("  |            +-+-+-+-+-+-+           |        \n");
+        printf("  |   <<<<<<   |S|C|O|R|E|S|   >>>>>>  |        \n");
+        printf("  |            +-+-+-+-+-+-+           |        \n");
+        printf("  |____________________________________|        \n");
+        Color(15,0);
+        for(int i=0;i<10;i++)
         {
             if(score[i]!=0)
             {
-               printf("%s avec un score de %d\n",pseudoLue[i],score[i]);
+               Color(9,0);
+               printf("   ------------------------------------\n");
+               Color(15,0);
+               printf("   #%d    %s ==>  %d POINTS\n",i+1,pseudoLue[i],score[i]);
+               Color(11,0);
+               printf("   ------------------------------------\n");
+               Color(12,0);
             }
         }
+        Color(12,0);
+        printf("\n");
+        printf(" APPUYER SUR LA TOUCHE ESPACE POUR QUITTER\n");
+        Color(15,0);
         char c=toucheAppuiez();
         if(c==' ')
         {

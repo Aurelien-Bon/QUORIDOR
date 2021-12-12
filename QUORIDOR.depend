@@ -1,6 +1,10 @@
 # depslib dependency file v1.0
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 1639351833 source:c:\users\aurel\documents\github\quoridor\main.c
+=======
+1639347581 source:c:\users\aurel\documents\github\quoridor\main.c
+>>>>>>> Stashed changes
 =======
 1639347581 source:c:\users\aurel\documents\github\quoridor\main.c
 >>>>>>> Stashed changes
@@ -11,7 +15,11 @@
 	<windows.h>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\terrain.h
+=======
+1639349472 c:\users\aurel\documents\github\quoridor\terrain.h
+>>>>>>> Stashed changes
 =======
 1639349472 c:\users\aurel\documents\github\quoridor\terrain.h
 >>>>>>> Stashed changes
@@ -68,7 +76,11 @@
 	<windows.h>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 1639349885 source:c:\users\aurel\documents\github\quoridor\bariere.c
+=======
+1639348382 source:c:\users\aurel\documents\github\quoridor\bariere.c
+>>>>>>> Stashed changes
 =======
 1639348382 source:c:\users\aurel\documents\github\quoridor\bariere.c
 >>>>>>> Stashed changes
@@ -77,6 +89,7 @@
 	<stdlib.h>
 	<windows.h>
 
+<<<<<<< Updated upstream
 <<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\bariere.h
 
@@ -98,6 +111,17 @@
 
 1639347593 source:c:\users\aurel\documents\github\quoridor\jeu.c
 >>>>>>> Stashed changes
+=======
+1639348370 c:\users\aurel\documents\github\quoridor\bariere.h
+
+1639348590 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
+	"crosshaire.h"
+	<stdlib.h>
+
+1639348592 c:\users\aurel\documents\github\quoridor\crosshaire.h
+
+1639347593 source:c:\users\aurel\documents\github\quoridor\jeu.c
+>>>>>>> Stashed changes
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -106,7 +130,11 @@
 	<string.h>
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\jeu.h
+=======
+1639348234 c:\users\aurel\documents\github\quoridor\jeu.h
+>>>>>>> Stashed changes
 =======
 1639348234 c:\users\aurel\documents\github\quoridor\jeu.h
 >>>>>>> Stashed changes
@@ -115,7 +143,11 @@
 	"bariere.h"
 
 <<<<<<< Updated upstream
+<<<<<<< Updated upstream
 1639349885 c:\users\aurel\documents\github\quoridor\joueur.h
+=======
+1639348796 c:\users\aurel\documents\github\quoridor\joueur.h
+>>>>>>> Stashed changes
 =======
 1639348796 c:\users\aurel\documents\github\quoridor\joueur.h
 >>>>>>> Stashed changes

@@ -1,6 +1,6 @@
 #ifndef BARIERE_H_INCLUDED
 #define BARIERE_H_INCLUDED
-typedef struct bariere//stucture des bariere
+typedef struct bariere
 {
 	int cord_x1;
 	int cord_y1;
@@ -10,7 +10,8 @@ typedef struct bariere//stucture des bariere
 	char sens;//h,b,g,d
 	int active;
 }t_bariere;
-struct bariere creeBariere(void);//methode de creation des bariere
-void Color(int couleurDuTexte,int couleurDeFond);//methode chagement de couleur de console donner par l'ecole
+struct bariere creeBariere(void);
+void afficherBariereText(struct bariere b);
+void Color(int couleurDuTexte,int couleurDeFond);
 
 #endif // BARIERE_H_INCLUDED

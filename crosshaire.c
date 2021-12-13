@@ -1,9 +1,9 @@
 #include "crosshaire.h"
 #include <stdlib.h>
 
-char choixType(void)//methode de selection de pion
+char choixType(void)
 {
-    int nb=rand()%8;//hasard entre 0 et 7
+    int nb=rand()%8;
     switch (nb) {
         case 0:
             return '@';
@@ -31,11 +31,24 @@ char choixType(void)//methode de selection de pion
             break;
     }
 }
-struct crosshaire creeCrossaire(void)//methode de creation de pion
+struct crosshaire creeCrossaire(void)
 {
     t_crosshaire cross={0};
     cross.type=choixType();
     cross.cor_x=-1;
-    cross.cor_y=-1;
+    cross.cor_y=-1
+    ;
     return cross;
+}
+int getX(struct crosshaire c)
+{
+    return c.cor_x;
+}
+int getY(struct crosshaire c)
+{
+    return c.cor_y;
+}
+char getType(struct crosshaire c)
+{
+    return c.type;
 }

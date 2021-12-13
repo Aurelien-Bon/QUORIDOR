@@ -1,18 +1,34 @@
 # depslib dependency file v1.0
-<<<<<<< HEAD
+205 <<<<<<< HEAD
+
 205 <<<<<<< Updated upstream
 
-1639351833 source:c:\users\aurel\documents\github\quoridor\main.c
-=======
-1639321434 source:c:\users\aurel\documents\github\quoridor\main.c
->>>>>>> parent of 0f4d4e3 (version 2.0)
+1639352605 source:c:\users\aurel\documents\github\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
 	<time.h>
 	<windows.h>
 
-<<<<<<< HEAD
+1639236029 ent of 0f4d4e3 (version 2.0)
+	<stdio.h>
+	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
+	"bariere.h"
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+	<stdio.h>
+	<stdlib.h>
+	"joueur.h"
+
+1639332828 D
+
 1639348796 shed changes
 	<stdio.h>
 	<stdlib.h>
@@ -37,9 +53,6 @@
 1639348234 ated upstream
 
 1639352173 c:\users\aurel\documents\github\quoridor\terrain.h
-=======
-1639339150 c:\users\aurel\documents\github\quoridor\terrain.h
->>>>>>> parent of 0f4d4e3 (version 2.0)
 
 1639339251 source:c:\users\aurel\documents\github\quoridor\terrain.c
 	"terrain.h"
@@ -92,17 +105,12 @@
 	<stdio.h>
 	<windows.h>
 
-<<<<<<< HEAD
 1639352173 source:c:\users\aurel\documents\github\quoridor\bariere.c
-=======
-1639141020 source:c:\users\aurel\documents\github\quoridor\bariere.c
->>>>>>> parent of 0f4d4e3 (version 2.0)
 	"bariere.h"
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 
-<<<<<<< HEAD
 1639352173 c:\users\aurel\documents\github\quoridor\bariere.h
 
 1639352173 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
@@ -110,17 +118,8 @@
 	<stdlib.h>
 
 1639352173 c:\users\aurel\documents\github\quoridor\crosshaire.h
-=======
-1639141020 c:\users\aurel\documents\github\quoridor\bariere.h
 
-1639141020 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
-	"crosshaire.h"
-	<stdlib.h>
-
-1639141020 c:\users\aurel\documents\github\quoridor\crosshaire.h
->>>>>>> parent of 0f4d4e3 (version 2.0)
-
-1639339139 source:c:\users\aurel\documents\github\quoridor\jeu.c
+1639352605 source:c:\users\aurel\documents\github\quoridor\jeu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -128,26 +127,15 @@
 	<windows.h>
 	<string.h>
 
-<<<<<<< HEAD
 1639352173 c:\users\aurel\documents\github\quoridor\jeu.h
-=======
-1639332828 c:\users\aurel\documents\github\quoridor\jeu.h
->>>>>>> parent of 0f4d4e3 (version 2.0)
 	"joueur.h"
 	"terrain.h"
 	"bariere.h"
 
-<<<<<<< HEAD
 1639352173 c:\users\aurel\documents\github\quoridor\joueur.h
 	"crosshaire.h"
 
 1639352173 source:c:\users\aurel\documents\github\quoridor\joueur.c
-=======
-1639143770 c:\users\aurel\documents\github\quoridor\joueur.h
-	"crosshaire.h"
-
-1639236029 source:c:\users\aurel\documents\github\quoridor\joueur.c
->>>>>>> parent of 0f4d4e3 (version 2.0)
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"

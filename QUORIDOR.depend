@@ -1,20 +1,38 @@
 # depslib dependency file v1.0
-<<<<<<< HEAD
 205 <<<<<<< HEAD
 
 205 <<<<<<< Updated upstream
 
-1639352605 source:c:\users\aurel\documents\github\quoridor\main.c
-=======
-1639351833 source:c:\users\aurel\documents\github\quoridor\main.c
->>>>>>> parent of f078a24 (VERSION 2.0.1)
+1639359221 source:c:\users\aurel\documents\github\quoridor\main.c
 	<stdio.h>
 	<stdlib.h>
 	"jeu.h"
 	<time.h>
 	<windows.h>
 
-<<<<<<< HEAD
+1639349885 ent of f078a24 (VERSION 2.0.1)
+	<stdio.h>
+	<stdlib.h>
+	"jeu.h"
+	<time.h>
+	<windows.h>
+	"bariere.h"
+	<stdio.h>
+	<stdlib.h>
+	<windows.h>
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	"jeu.h"
+	<windows.h>
+	<string.h>
+	"joueur.h"
+	"terrain.h"
+	"bariere.h"
+	"crosshaire.h"
+
+1639349885 D
+
 1639236029 ent of 0f4d4e3 (version 2.0)
 	<stdio.h>
 	<stdlib.h>
@@ -32,10 +50,7 @@
 	<stdlib.h>
 	"joueur.h"
 
-1639332828 D
-=======
-1639349885 c:\users\aurel\documents\github\quoridor\terrain.h
->>>>>>> parent of f078a24 (VERSION 2.0.1)
+1639359221 c:\users\aurel\documents\github\quoridor\terrain.h
 
 1639348796 shed changes
 	<stdio.h>
@@ -60,9 +75,7 @@
 
 1639348234 ated upstream
 
-1639352173 c:\users\aurel\documents\github\quoridor\terrain.h
-
-1639339251 source:c:\users\aurel\documents\github\quoridor\terrain.c
+1639359221 source:c:\users\aurel\documents\github\quoridor\terrain.c
 	"terrain.h"
 	<stdio.h>
 	<windows.h>
@@ -113,37 +126,21 @@
 	<stdio.h>
 	<windows.h>
 
-<<<<<<< HEAD
-1639352173 source:c:\users\aurel\documents\github\quoridor\bariere.c
-=======
-1639349885 source:c:\users\aurel\documents\github\quoridor\bariere.c
->>>>>>> parent of f078a24 (VERSION 2.0.1)
+1639359221 source:c:\users\aurel\documents\github\quoridor\bariere.c
 	"bariere.h"
 	<stdio.h>
 	<stdlib.h>
 	<windows.h>
 
-<<<<<<< HEAD
-1639352173 c:\users\aurel\documents\github\quoridor\bariere.h
+1639359221 c:\users\aurel\documents\github\quoridor\bariere.h
 
-1639352173 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
+1639359221 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
 	"crosshaire.h"
 	<stdlib.h>
 
-1639352173 c:\users\aurel\documents\github\quoridor\crosshaire.h
+1639359221 c:\users\aurel\documents\github\quoridor\crosshaire.h
 
-1639352605 source:c:\users\aurel\documents\github\quoridor\jeu.c
-=======
-1639349885 c:\users\aurel\documents\github\quoridor\bariere.h
-
-1639349885 source:c:\users\aurel\documents\github\quoridor\crosshaire.c
-	"crosshaire.h"
-	<stdlib.h>
-
-1639349885 c:\users\aurel\documents\github\quoridor\crosshaire.h
-
-1639351474 source:c:\users\aurel\documents\github\quoridor\jeu.c
->>>>>>> parent of f078a24 (VERSION 2.0.1)
+1639359603 source:c:\users\aurel\documents\github\quoridor\jeu.c
 	<stdio.h>
 	<stdlib.h>
 	<string.h>
@@ -151,23 +148,15 @@
 	<windows.h>
 	<string.h>
 
-<<<<<<< HEAD
-1639352173 c:\users\aurel\documents\github\quoridor\jeu.h
-=======
-1639349885 c:\users\aurel\documents\github\quoridor\jeu.h
->>>>>>> parent of f078a24 (VERSION 2.0.1)
+1639359221 c:\users\aurel\documents\github\quoridor\jeu.h
 	"joueur.h"
 	"terrain.h"
 	"bariere.h"
 
-<<<<<<< HEAD
-1639352173 c:\users\aurel\documents\github\quoridor\joueur.h
-=======
-1639349885 c:\users\aurel\documents\github\quoridor\joueur.h
->>>>>>> parent of f078a24 (VERSION 2.0.1)
+1639359221 c:\users\aurel\documents\github\quoridor\joueur.h
 	"crosshaire.h"
 
-1639352173 source:c:\users\aurel\documents\github\quoridor\joueur.c
+1639359221 source:c:\users\aurel\documents\github\quoridor\joueur.c
 	<stdio.h>
 	<stdlib.h>
 	"joueur.h"
